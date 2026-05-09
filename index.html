@@ -28,6 +28,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
+/* Prevent layout shift on load */
+img{content-visibility:auto;}
 body{
   background:var(--ivory);color:var(--dark);
   font-family:'Cormorant Garamond',Georgia,serif;
@@ -138,8 +140,8 @@ body{
 
 .label{
   display:block;font-family:'Jost',sans-serif;
-  font-size:10px;letter-spacing:7px;text-transform:uppercase;
-  color:var(--sage);margin-bottom:16px;
+  font-size:clamp(10px,1.8vw,11px);letter-spacing:7px;text-transform:uppercase;
+  color:var(--sage);margin-bottom:20px;
 }
 .label-light{color:var(--sage3);}
 .script-title{
@@ -149,13 +151,14 @@ body{
 }
 .script-light{color:#fff;}
 .body-text{
-  font-size:clamp(16px,2.4vw,19px);
+  font-size:clamp(16px,2.4vw,18px);
   color:var(--muted);line-height:1.9;
-  max-width:520px;margin:0 auto;
+  max-width:480px;margin:0 auto;
+  letter-spacing:0.2px;
 }
-.orn{display:flex;align-items:center;gap:14px;justify-content:center;margin:28px 0;}
+.orn{display:flex;align-items:center;gap:14px;justify-content:center;margin:32px 0;}
 .orn-line{flex:1;max-width:72px;height:1px;background:var(--line);}
-.orn-diamond{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;opacity:0.75;}
+.orn-diamond{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;opacity:0.75;transition:opacity 0.3s,transform 0.3s;}
 
 /* ══════════════════════════════
    HERO — responsive
@@ -220,7 +223,9 @@ body{
   font-family:'Jost',sans-serif;
   font-size:8px;letter-spacing:5px;text-transform:uppercase;
   color:rgba(255,255,255,0.3);
+  display:none;
 }
+@media(min-height:600px){.hero-scroll span{display:block;}}
 .scroll-line{
   width:1px;height:36px;
   background:linear-gradient(to bottom,rgba(255,255,255,0.25),transparent);
@@ -240,8 +245,8 @@ body{
   display:grid;
   grid-template-columns:1fr 1px 1fr;
   gap:0 clamp(20px,4vw,48px);
-  margin:clamp(28px,4vw,44px) auto 0;
-  max-width:540px;
+  margin:40px auto 0;
+  max-width:520px;
 }
 .parents-sep{background:var(--line);}
 .parents-role{
@@ -249,7 +254,7 @@ body{
   font-size:10px;letter-spacing:5px;text-transform:uppercase;
   color:var(--dusty);margin-bottom:12px;
 }
-.parents-name{font-size:clamp(15px,2.2vw,18px);color:var(--dark);line-height:1.7;}
+.parents-name{font-size:clamp(15px,2.2vw,17px);color:var(--dark);line-height:1.7;}
 
 /* ══════════════════════════════
    PARALLAX BANNER
@@ -264,6 +269,7 @@ body{
   object-fit:cover;object-position:center;
   position:absolute;top:-17%;left:0;
   will-change:transform;
+  image-rendering:crisp-edges;
 }
 .parallax-overlay{
   position:absolute;inset:0;
@@ -291,7 +297,7 @@ body{
 ══════════════════════════════ */
 .countdown-wrap{
   background:var(--dark);
-  padding:clamp(52px,8vw,96px) clamp(16px,4vw,48px);
+  padding:clamp(64px,9vw,104px) clamp(20px,4vw,48px);
   text-align:center;position:relative;overflow:hidden;
 }
 .countdown-wrap::before{
@@ -301,17 +307,17 @@ body{
 }
 .cd-label{
   display:block;font-family:'Jost',sans-serif;
-  font-size:10px;letter-spacing:7px;text-transform:uppercase;
+  font-size:clamp(10px,1.8vw,11px);letter-spacing:7px;text-transform:uppercase;
   color:var(--sage3);margin-bottom:10px;
 }
 .cd-script{
   font-family:'Jost',sans-serif;
   font-weight:200;
-  font-size:clamp(13px,2.5vw,16px);
-  letter-spacing:6px;
+  font-size:clamp(10px,1.8vw,11px);
+  letter-spacing:7px;
   text-transform:uppercase;
-  color:rgba(255,255,255,0.7);
-  margin-bottom:clamp(32px,5vw,52px);
+  color:rgba(255,255,255,0.55);
+  margin-bottom:clamp(40px,6vw,60px);
 }
 .cd-grid{
   display:flex;gap:0;justify-content:center;
@@ -327,14 +333,14 @@ body{
 }
 .cd-box+.cd-box{border-left:none;}
 .cd-num{
-  font-size:clamp(36px,8vw,62px);font-weight:300;
+  font-size:clamp(40px,9vw,68px);font-weight:300;
   color:#fff;line-height:1;
   font-variant-numeric:tabular-nums;
 }
 .cd-unit{
   font-family:'Jost',sans-serif;
-  font-size:10px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--sage3);margin-top:8px;
+  font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--sage3);margin-top:10px;
 }
 
 /* ══════════════════════════════
@@ -348,9 +354,9 @@ body{
 }
 .tl-item{
   display:grid;
-  grid-template-columns:1fr clamp(38px,6vw,52px) 1fr;
+  grid-template-columns:1fr clamp(40px,6vw,52px) 1fr;
   align-items:center;
-  padding:clamp(20px,3vw,32px) 0;
+  padding:clamp(24px,3.5vw,36px) 0;
 }
 .tl-left{text-align:right;padding-right:clamp(12px,2.5vw,24px);}
 .tl-right{text-align:left;padding-left:clamp(12px,2.5vw,24px);}
@@ -368,15 +374,15 @@ body{
 .tl-item:hover .tl-icon{transform:scale(1.12);box-shadow:0 4px 20px rgba(125,140,114,0.24);}
 .tl-time{
   display:block;font-family:'Jost',sans-serif;
-  font-size:clamp(10px,1.8vw,12px);letter-spacing:3px;
-  color:var(--dusty);text-transform:uppercase;margin-bottom:6px;
+  font-size:clamp(10px,1.8vw,11px);letter-spacing:4px;
+  color:var(--dusty);text-transform:uppercase;margin-bottom:8px;
 }
-.tl-event{font-size:clamp(16px,2.8vw,20px);font-weight:400;color:var(--dark);line-height:1.3;}
-.tl-place{font-size:clamp(13px,2.2vw,15px);font-style:italic;color:var(--muted);margin-top:4px;line-height:1.45;}
+.tl-event{font-size:clamp(17px,3vw,21px);font-weight:400;color:var(--dark);line-height:1.3;}
+.tl-place{font-size:clamp(13px,2vw,15px);font-style:italic;color:var(--muted);margin-top:6px;line-height:1.5;}
 .map-link{
   display:inline-flex;align-items:center;gap:4px;
   margin-top:10px;font-family:'Jost',sans-serif;
-  font-size:clamp(9px,1.6vw,10px);letter-spacing:3px;
+  font-size:clamp(9px,1.5vw,10px);letter-spacing:3px;
   text-transform:uppercase;color:var(--dusty);
   text-decoration:none;border-bottom:1px solid var(--dusty2);
   transition:color 0.2s,border-color 0.2s;
@@ -388,7 +394,7 @@ body{
 ══════════════════════════════ */
 .carousel-section{
   background:var(--sage3);
-  padding:clamp(36px,5vw,56px) 0 clamp(60px,8vw,88px);
+  padding:clamp(48px,7vw,72px) 0 clamp(60px,8vw,80px);
   text-align:center;
 }
 .carousel-head{padding:0 clamp(24px,5vw,56px) 0;}
@@ -460,7 +466,7 @@ body{
 ══════════════════════════════ */
 .closing{
   background:var(--dark);
-  padding:clamp(64px,10vw,112px) clamp(24px,6vw,72px);
+  padding:clamp(72px,10vw,112px) clamp(28px,6vw,64px);
   text-align:center;position:relative;overflow:hidden;
 }
 .closing::before{
@@ -475,11 +481,11 @@ body{
 .closing-amp{color:var(--dusty3);}
 .closing-date{
   font-family:'Jost',sans-serif;
-  font-size:10px;letter-spacing:8px;text-transform:uppercase;
+  font-size:clamp(10px,1.8vw,11px);letter-spacing:8px;text-transform:uppercase;
   color:var(--sage3);margin-top:20px;position:relative;
 }
 .closing-msg{
-  font-size:clamp(16px,2.4vw,19px);font-style:italic;
+  font-size:clamp(16px,2.4vw,18px);font-style:italic;
   color:rgba(255,255,255,0.42);margin-top:32px;
   max-width:420px;margin-left:auto;margin-right:auto;
   position:relative;line-height:1.9;
@@ -493,12 +499,12 @@ body{
 .rsvp-field:first-child{padding-top:0;}
 .rsvp-label{
   display:block;font-family:'Jost',sans-serif;
-  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  font-size:clamp(10px,1.8vw,11px);letter-spacing:5px;text-transform:uppercase;
   color:var(--dark);margin-bottom:6px;
 }
 .rsvp-sublabel{
   font-family:'Cormorant Garamond',serif;
-  font-size:14px;font-style:italic;
+  font-size:clamp(14px,2.2vw,15px);font-style:italic;
   color:var(--muted);margin-bottom:12px;
 }
 .rsvp-input{
@@ -508,7 +514,7 @@ body{
   font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--dark);
   outline:none;transition:border-color 0.2s,background 0.2s;resize:vertical;
 }
-.rsvp-input:focus{border-color:var(--dusty);background:rgba(255,255,255,0.85);}
+.rsvp-input:focus{border-color:var(--dusty);background:rgba(255,255,255,0.85);box-shadow:0 2px 12px rgba(122,147,168,0.1);}
 .rsvp-toggle-group{display:flex;gap:10px;}
 .rsvp-toggle{
   flex:1;padding:11px 0;
@@ -535,6 +541,51 @@ body{
 .d3{transition-delay:0.34s!important;}
 .d4{transition-delay:0.46s!important;}
 
+/* ══ ELEGANT DETAILS ══ */
+
+/* Thin gold accent line at top of page */
+body::before{
+  content:'';
+  display:block;
+  width:100%;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  opacity:0.5;
+  position:fixed;top:0;left:0;z-index:999;
+  pointer-events:none;
+}
+
+/* Section subtle top border accent */
+.section-warm{
+  border-top:1px solid rgba(201,169,110,0.15);
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.section-dusty{
+  border-top:1px solid rgba(122,147,168,0.15);
+  border-bottom:1px solid rgba(122,147,168,0.15);
+}
+
+/* Smooth image loading */
+img{transition:opacity 0.4s ease;}
+
+/* Selection color */
+::selection{background:rgba(122,147,168,0.25);color:var(--dark);}
+
+/* Smooth font rendering */
+*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+/* Countdown box subtle hover */
+.cd-box{transition:background 0.3s;}
+.cd-box:hover{background:rgba(255,255,255,0.06);}
+
+/* Timeline icon animation */
+.tl-icon{transition:transform 0.35s cubic-bezier(.4,0,.2,1),box-shadow 0.35s;}
+
+/* RSVP toggle subtle animation */
+.rsvp-toggle{transition:all 0.25s cubic-bezier(.4,0,.2,1);}
+
+/* Ornament line glow on section hover */
+.orn-diamond{transition:opacity 0.3s,transform 0.3s;}
+
 /* ══ DESKTOP ENHANCEMENTS (≥640px) ══ */
 @media(min-width:640px){
   body{background:#e8e3d8;}
@@ -546,9 +597,62 @@ body{
   .hero{border-radius:0;}
 }
 
+/* ══ MOBILE (≤480px) ══ */
 @media(max-width:480px){
+  /* Parents: stack vertically */
   .parents-grid{grid-template-columns:1fr;gap:28px;}
   .parents-sep{display:none;}
+
+  /* Section padding tighter */
+  .section{padding:48px 24px;}
+
+  /* Countdown: tighter boxes */
+  .cd-box{min-width:56px;padding:12px 8px;}
+  .cd-num{font-size:clamp(36px,10vw,52px);}
+
+  /* Timeline: tighter columns */
+  .tl-item{grid-template-columns:1fr 36px 1fr;}
+  .tl-left{padding-right:10px;}
+  .tl-right{padding-left:10px;}
+  .tl-event{font-size:clamp(15px,4.5vw,18px);}
+  .tl-place{font-size:13px;}
+  .tl-time{font-size:9px;letter-spacing:3px;}
+
+  /* Map link on mobile */
+  .map-link{font-size:9px;}
+
+  /* Carousel full width on mobile */
+  .carousel{width:100%;border-radius:0;}
+
+  /* RSVP toggles stacked nicely */
+  .rsvp-toggle-group{gap:8px;}
+  .rsvp-toggle{padding:13px 0;font-size:9px;}
+
+  /* Closing tighter */
+  .closing{padding:56px 24px;}
+  .closing-msg{font-size:15px;}
+
+  /* Body text slightly smaller on mobile */
+  .body-text{font-size:16px;}
+
+  /* Hero scroll hidden on very small */
+  .hero-scroll{margin-top:20px;}
+
+  /* Parallax height on mobile */
+  .parallax-wrap{height:clamp(160px,45vw,240px);}
+
+  /* Gift box padding */
+  .cd-grid{max-width:100%;}
+}
+
+/* ══ VERY SMALL (≤360px) ══ */
+@media(max-width:360px){
+  .hero-names{font-size:clamp(44px,13vw,60px);}
+  .splash-names{font-size:clamp(44px,13vw,60px);}
+  .section{padding:40px 20px;}
+  .tl-item{grid-template-columns:1fr 32px 1fr;}
+  .tl-event{font-size:15px;}
+  .cd-num{font-size:36px;}
 }
 </style>
 </head>
@@ -601,7 +705,7 @@ body{
 <div class="section section-ivory">
   <p class="body-text reveal">Después de caminar juntos de la mano de Dios, hemos decidido unir nuestras vidas en el sagrado sacramento del matrimonio.</p>
   <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="body-text reveal d2" style="font-size:clamp(17px,3.2vw,22px);letter-spacing:4px;text-transform:uppercase;color:var(--dark);line-height:2;font-family:'Jost',sans-serif;font-weight:200;">Con la bendición de Dios<br>y de nuestros padres</p>
+  <p class="body-text reveal d2" style="font-size:clamp(12px,2.2vw,15px);letter-spacing:7px;text-transform:uppercase;color:var(--dark);line-height:2;font-family:'Jost',sans-serif;font-weight:200;">Con la bendición de Dios<br>y de nuestros padres</p>
   <div class="parents-grid">
     <div style="text-align:center;" class="reveal-left d2">
       <span class="parents-role">Padres de la novia</span>
@@ -615,18 +719,11 @@ body{
   </div>
 </div>
 
-<!-- BANNER -->
-<div class="parallax-wrap" data-parallax>
-  <img class="parallax-img" src="fo2.jpg" alt="Debanhi y José">
-  <div class="parallax-overlay"></div>
-</div>
-
 <!-- FECHA -->
 <div class="section section-warm">
-  <span class="label reveal">Con alegría los invitamos a celebrar</span>
-  <h2 class="script-title reveal d1">Nuestra Boda</h2>
+  <span class="label reveal" style="margin-bottom:0;">Con alegría los invitamos a celebrar nuestra boda</span>
 
-  <div class="reveal d2" style="margin-top:48px;text-align:center;">
+  <div class="reveal d2" style="margin-top:0;text-align:center;">
 
     <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(80px,22vw,128px);font-weight:300;color:var(--dark);line-height:1;letter-spacing:-2px;">01</p>
 
@@ -636,9 +733,9 @@ body{
       <div style="flex:1;height:1px;background:var(--line);"></div>
     </div>
 
-    <p style="font-family:'Jost',sans-serif;font-size:clamp(11px,2.5vw,13px);letter-spacing:8px;text-transform:uppercase;color:var(--muted);line-height:1;">Agosto &nbsp;·&nbsp; 2026</p>
+    <p style="font-family:'Jost',sans-serif;font-size:clamp(12px,2.5vw,14px);letter-spacing:8px;text-transform:uppercase;color:var(--muted);line-height:1;">Agosto &nbsp;·&nbsp; 2026</p>
 
-    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,3.2vw,22px);font-style:italic;color:var(--sage);margin-top:16px;">Sábado</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.8vw,18px);font-style:italic;color:var(--sage);margin-top:14px;">Sábado</p>
 
   </div>
 </div>
@@ -654,9 +751,15 @@ body{
   </div>
 </div>
 
+<!-- BANNER -->
+<div class="parallax-wrap" data-parallax>
+  <img class="parallax-img" src="fo2.jpg" alt="Debanhi y José">
+  <div class="parallax-overlay"></div>
+</div>
+
 <!-- ITINERARIO -->
 <div class="section section-ivory">
-  <span class="label reveal" style="font-size:12px;letter-spacing:6px;">Programa de la boda</span>
+  <span class="label reveal">Programa de la boda</span>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-left reveal-left">
@@ -714,6 +817,7 @@ body{
   <div class="dots" id="dots"></div>
 </div>
 
+
 <!-- REGALOS -->
 <div class="section section-ivory">
   <span class="label reveal">Regalos</span>
@@ -724,20 +828,20 @@ body{
 
       <!-- banco -->
       <div style="padding:20px 28px 16px;border-bottom:1px solid var(--line);text-align:center;">
-        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Banco</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);">Mercado Pago</p>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Banco</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);">Mercado Pago</p>
       </div>
 
       <!-- titular -->
       <div style="padding:16px 28px;border-bottom:1px solid var(--line);text-align:center;">
-        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Titular</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);">José Martínez Núñez</p>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Titular</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);">José Martínez Núñez</p>
       </div>
 
       <!-- CLABE + botón copiar -->
       <div style="padding:16px 28px 20px;text-align:center;">
-        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:10px;">CLABE</p>
-        <p id="clabeNum" style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);letter-spacing:2px;margin-bottom:16px;">722969040898302373</p>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:10px;">CLABE</p>
+        <p id="clabeNum" style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);letter-spacing:3px;margin-bottom:16px;">722969040898302373</p>
         <button onclick="copiarCLABE()" id="copyBtn" style="
           display:inline-flex;align-items:center;gap:8px;
           padding:10px 24px;
@@ -745,7 +849,7 @@ body{
           border:1px solid var(--dusty);
           border-radius:2px;
           font-family:'Jost',sans-serif;
-          font-size:9px;letter-spacing:4px;text-transform:uppercase;
+          font-size:10px;letter-spacing:4px;text-transform:uppercase;
           color:var(--dusty);cursor:pointer;
           transition:all 0.2s;
         ">
@@ -760,9 +864,15 @@ body{
   </div>
 </div>
 
+<!-- BANNER FO3 -->
+<div class="parallax-wrap" data-parallax>
+  <img class="parallax-img" src="fo3.jpg" alt="Debanhi y José">
+  <div class="parallax-overlay"></div>
+</div>
+
 <!-- RSVP -->
 <div class="section section-dusty">
-  <span class="label reveal" style="font-size:12px;letter-spacing:6px;">Confirmación de asistencia</span>
+  <span class="label reveal">Confirmación de asistencia</span>
   <p class="body-text reveal d1">Les agradecemos confirmar su asistencia antes del <strong>1 de julio de 2026</strong></p>
 
   <!-- FORM -->
@@ -773,7 +883,8 @@ body{
       <!-- Nombre -->
       <div class="rsvp-field">
         <label class="rsvp-label">Nombre completo</label>
-        <input id="rsvpNombre" type="text" class="rsvp-input" placeholder="Tu nombre" required>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(13px,2vw,14px);font-style:italic;color:var(--muted);margin-bottom:8px;opacity:0.8;">Un registro por invitado, por favor</p>
+        <input id="rsvpNombre" type="text" class="rsvp-input" placeholder="Tu nombre completo" required>
       </div>
 
       <!-- Ceremonia -->
@@ -798,12 +909,12 @@ body{
 
       <!-- Mensaje -->
       <div class="rsvp-field">
-        <label class="rsvp-label">Mensaje para los novios <span style="opacity:0.5;font-size:11px;">(opcional)</span></label>
+        <label class="rsvp-label">Mensaje para los novios <span style="opacity:0.5;font-size:10px;">(opcional)</span></label>
         <textarea id="rsvpMensaje" class="rsvp-input" rows="3" placeholder="Escribe algo bonito..."></textarea>
       </div>
 
       <!-- Error -->
-      <p id="rsvpError" style="display:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;color:var(--dusty);text-align:center;margin-top:8px;"></p>
+      <p id="rsvpError" style="display:none;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;color:var(--dusty);text-align:center;margin-top:8px;"></p>
 
       <!-- Submit -->
       <button type="submit" class="btn-rsvp" style="margin-top:28px;width:100%;border:1px solid var(--dark);color:var(--dark);">
@@ -814,8 +925,8 @@ body{
 
     <!-- Gracias -->
     <div id="rsvpThanks" style="display:none;text-align:center;padding:32px 0;">
-      <div style="font-family:'Great Vibes',cursive;font-size:clamp(36px,8vw,52px);color:var(--sage);margin-bottom:12px;">¡Gracias!</div>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--muted);line-height:1.8;">Tu confirmación ha sido registrada.<br>¡Nos vemos pronto! 🤍</p>
+      <p style="font-family:'Jost',sans-serif;font-size:clamp(11px,2.5vw,13px);letter-spacing:7px;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">¡Gracias!</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,18px);font-style:italic;color:var(--muted);line-height:1.8;">Tu confirmación ha sido registrada.<br>¡Nos vemos pronto! 🤍</p>
     </div>
 
   </div>
