@@ -737,6 +737,52 @@ body{
   <div class="dots" id="dots"></div>
 </div>
 
+<!-- REGALOS -->
+<div class="section section-ivory">
+  <span class="label reveal">Regalos</span>
+  <p class="body-text reveal d1">Nos llena de alegría compartir este momento tan especial contigo. Tu presencia será el mejor regalo para nosotros; sin embargo, si deseas obsequiarnos un detalle adicional, ponemos a tu disposición los siguientes datos bancarios.</p>
+
+  <div class="reveal d2" style="margin-top:36px;max-width:400px;margin-left:auto;margin-right:auto;">
+    <div style="border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--ivory3);">
+
+      <!-- banco -->
+      <div style="padding:20px 28px 16px;border-bottom:1px solid var(--line);text-align:center;">
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Banco</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);">Mercado Pago</p>
+      </div>
+
+      <!-- titular -->
+      <div style="padding:16px 28px;border-bottom:1px solid var(--line);text-align:center;">
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Titular</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);">José Martínez Núñez</p>
+      </div>
+
+      <!-- CLABE + botón copiar -->
+      <div style="padding:16px 28px 20px;text-align:center;">
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--sage);margin-bottom:10px;">CLABE</p>
+        <p id="clabeNum" style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);letter-spacing:2px;margin-bottom:16px;">722969040898302373</p>
+        <button onclick="copiarCLABE()" id="copyBtn" style="
+          display:inline-flex;align-items:center;gap:8px;
+          padding:10px 24px;
+          background:transparent;
+          border:1px solid var(--dusty);
+          border-radius:2px;
+          font-family:'Jost',sans-serif;
+          font-size:9px;letter-spacing:4px;text-transform:uppercase;
+          color:var(--dusty);cursor:pointer;
+          transition:all 0.2s;
+        ">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="copyTxt">Copiar CLABE</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- RSVP -->
 <div class="section section-dusty">
   <span class="label reveal" style="font-size:12px;letter-spacing:6px;">Confirmación de asistencia</span>
@@ -937,6 +983,28 @@ var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);}});
 },{threshold:0.1});
 allR.forEach(function(el){obs.observe(el);});
+
+/* ══ COPIAR CLABE ══ */
+function copiarCLABE() {
+  var clabe = document.getElementById('clabeNum').textContent.trim();
+  var btn   = document.getElementById('copyBtn');
+  var txt   = document.getElementById('copyTxt');
+  navigator.clipboard.writeText(clabe).then(function() {
+    txt.textContent = '¡Copiada!';
+    btn.style.background = 'var(--sage)';
+    btn.style.borderColor = 'var(--sage)';
+    btn.style.color = '#fff';
+    setTimeout(function() {
+      txt.textContent = 'Copiar CLABE';
+      btn.style.background = 'transparent';
+      btn.style.borderColor = 'var(--dusty)';
+      btn.style.color = 'var(--dusty)';
+    }, 2500);
+  }).catch(function() {
+    txt.textContent = '¡Copiada!';
+    setTimeout(function(){ txt.textContent = 'Copiar CLABE'; }, 2500);
+  });
+}
 
 /* ══ RSVP FORM ══ */
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPWFvKm_cRWqsI4RPkPUCSzoMLb2g6tM0RCSgU7oT_MWqdUH8kUrdRWvfK-Fyr3P3X/exec';
