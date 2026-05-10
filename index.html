@@ -99,11 +99,12 @@ body{
 /* Names */
 .splash-names{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(58px,15vw,92px);
+  font-size:clamp(42px,11vw,92px);
   color:#fff;line-height:1;
   text-shadow:0 4px 40px rgba(0,0,0,0.3);
   animation:splashIn 1.2s 0.15s ease both;opacity:0;
-  letter-spacing:2px;
+  letter-spacing:1px;
+  white-space:nowrap;
 }
 .splash-amp{color:var(--dusty3);}
 
@@ -118,8 +119,9 @@ body{
 /* Date */
 .splash-date{
   font-family:'Jost',sans-serif;
-  font-size:clamp(9px,1.8vw,11px);letter-spacing:9px;
+  font-size:clamp(9px,1.8vw,11px);letter-spacing:4px;
   text-transform:uppercase;color:rgba(255,255,255,0.5);
+  white-space:nowrap;
   animation:splashIn 1.2s 0.45s ease both;opacity:0;
 }
 
@@ -783,7 +785,7 @@ img{transition:opacity 0.4s ease;}
 /* ══ VERY SMALL (≤360px) ══ */
 @media(max-width:360px){
   .hero-names{font-size:clamp(44px,13vw,60px);}
-  .splash-names{font-size:clamp(44px,13vw,60px);}
+  .splash-names{font-size:clamp(36px,10vw,52px);}
   .section{padding:40px 20px;}
   .tl-item{grid-template-columns:1fr 36px 1fr;padding:16px 0;}
   .tl-left{padding-right:8px;}
