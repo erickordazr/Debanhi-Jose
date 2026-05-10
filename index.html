@@ -221,8 +221,9 @@ body{
 
 .label{
   display:block;font-family:'Jost',sans-serif;
-  font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;
+  font-size:clamp(11px,2vw,12px);letter-spacing:3px;text-transform:uppercase;
   color:var(--sage);margin-bottom:20px;
+  max-width:100%;
 }
 .label-light{color:var(--sage3);}
 .script-title{
@@ -413,12 +414,11 @@ body{
 .cd-script{
   font-family:'Jost',sans-serif;
   font-weight:300;
-  font-size:clamp(12px,2vw,14px);
-  letter-spacing:5px;
+  font-size:clamp(11px,2vw,12px);
+  letter-spacing:3px;
   text-transform:uppercase;
   color:rgba(255,255,255,0.55);
   margin-bottom:clamp(40px,6vw,60px);
-  font-style:italic;
 }
 .cd-grid{
   display:flex;gap:0;justify-content:center;
@@ -737,6 +737,12 @@ img{transition:opacity 0.4s ease;}
 
   /* Section padding tighter */
   .section{padding:48px 24px;}
+
+  /* Labels uniform on mobile */
+  .label, .cd-script{
+    font-size:11px;
+    letter-spacing:2px;
+  }
 
   /* Countdown: tighter boxes */
   .cd-box{min-width:56px;padding:12px 8px;}
