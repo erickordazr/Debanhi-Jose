@@ -1351,13 +1351,8 @@ var musicBtn = document.getElementById('musicBtn');
 var playing  = false;
 
 splash.addEventListener('click', function(){
-  // Curtain wipe up + content slides
-  requestAnimationFrame(function(){
-    splash.classList.add('closing');
-    setTimeout(function(){
-      splash.style.display = 'none';
-    }, 1050);
-  });
+  splash.style.opacity = '0';
+  setTimeout(function(){ splash.style.display = 'none'; }, 800);
   audio.play().then(function(){
     playing = true;
     musicBtn.classList.add('playing');
