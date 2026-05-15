@@ -961,6 +961,13 @@ img{transition:opacity 0.4s ease;}
     <div class="music-bar"></div>
   </div>
 </button>
+
+<!-- GUEST BANNER -->
+<div id="guestBanner">
+  <p class="guest-banner-name" id="guestName"></p>
+  <p class="guest-banner-seats" id="guestSeats"></p>
+</div>
+
 <audio id="weddingAudio" loop><source src="cancion.mp3" type="audio/mpeg"></audio>
 
 <!-- ══ MAIN CONTENT ══ -->
@@ -1344,6 +1351,23 @@ img{transition:opacity 0.4s ease;}
   draw();
 })();
 
+/* ══ URL PARAMS — personalization ══ */
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var nombre = params.get('nombre');
+  var invitados = params.get('invitados');
+
+  if(!nombre) return;
+
+  // Decode and capitalize
+  nombre = decodeURIComponent(nombre);
+  var num = invitados ? parseInt(invitados) : 1;
+
+  // Show guest banner after splash closes
+  window.guestNombre = nombre;
+  window.guestNum = num;
+})();
+
 /* ══ SPLASH + AUDIO ══ */
 var splash   = document.getElementById('splash');
 var audio    = document.getElementById('weddingAudio');
@@ -1352,7 +1376,25 @@ var playing  = false;
 
 splash.addEventListener('click', function(){
   splash.style.opacity = '0';
-  setTimeout(function(){ splash.style.display = 'none'; }, 800);
+  setTimeout(function(){
+    splash.style.display = 'none';
+    // Show guest banner if personalized
+    if(window.guestNombre){
+      var banner = document.getElementById('guestBanner');
+      var nameEl = document.getElementById('guestName');
+      var seatsEl = document.getElementById('guestSeats');
+      nameEl.textContent = window.guestNombre;
+      seatsEl.textContent = window.guestNum > 1
+        ? window.guestNum + ' lugares reservados'
+        : '1 lugar reservado';
+      setTimeout(function(){ banner.classList.add('visible'); }, 300);
+      // Auto-hide after 6s
+      setTimeout(function(){ banner.classList.remove('visible'); }, 6500);
+      // Pre-fill RSVP
+      var input = document.getElementById('rsvpNombre');
+      if(input) input.value = window.guestNombre;
+    }
+  }, 800);
   audio.play().then(function(){
     playing = true;
     musicBtn.classList.add('playing');
