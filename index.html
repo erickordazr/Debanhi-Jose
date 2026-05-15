@@ -70,7 +70,7 @@ body{
   position:absolute;
   width:60vmax;height:60vmax;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(122,147,168,0.07) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(201,169,110,0.06) 0%,transparent 70%);
   pointer-events:none;
   animation:glowPulse 4s ease-in-out infinite;
 }
@@ -933,9 +933,6 @@ img{transition:opacity 0.4s ease;}
 
     <!-- CTA -->
     <div class="splash-btn">
-      <div class="splash-ring">
-        <div class="splash-ring-inner"></div>
-      </div>
       <p class="splash-hint">Abre tu invitación</p>
     </div>
 
@@ -1127,7 +1124,7 @@ img{transition:opacity 0.4s ease;}
 
       <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:20px;">Mujeres</p>
 
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Vestido largo o midi con hombros<br>y escote cubiertos</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Vestido largo o corte midi<br>Hombros y escote cubiertos para la iglesia</p>
 
       <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px;">
@@ -1151,7 +1148,7 @@ img{transition:opacity 0.4s ease;}
 
       <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:20px;">Hombres</p>
 
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Traje formal con camisa de vestir<br>o lino de manga larga y zapatos formales</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Traje o pantalón formal<br>Camisa de vestir o de lino manga larga<br>Zapatos formales</p>
 
       <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px;">
@@ -1318,12 +1315,12 @@ img{transition:opacity 0.4s ease;}
   var c=document.getElementById('splashCanvas'),ctx=c.getContext('2d'),W,H,pts=[];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
-  for(var i=0;i<60;i++)pts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.4+0.4,vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.15),o:Math.random()*.4+.08});
+  for(var i=0;i<80;i++)pts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+0.3,vx:(Math.random()-.5)*.2,vy:-(Math.random()*.5+.1),o:Math.random()*.35+.06});
   function draw(){
     ctx.clearRect(0,0,W,H);
     pts.forEach(function(p){
       ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(205,214,199,'+p.o+')';ctx.fill();
+      ctx.fillStyle='rgba(201,169,110,'+p.o+')';ctx.fill();
       p.x+=p.vx/W;p.y+=p.vy/H;
       if(p.y<-.01){p.y=1.01;p.x=Math.random();}
       if(p.x<0)p.x=1;if(p.x>1)p.x=0;
