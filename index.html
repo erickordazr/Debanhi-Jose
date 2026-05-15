@@ -1351,14 +1351,13 @@ var musicBtn = document.getElementById('musicBtn');
 var playing  = false;
 
 splash.addEventListener('click', function(){
-  // Elegant transition: scale up slightly + fade
-  splash.style.transition = 'opacity 0.9s ease, transform 1.1s cubic-bezier(.4,0,.2,1)';
-  splash.style.opacity = '0';
-  splash.style.transform = 'scale(1.06)';
-  setTimeout(function(){
-    splash.style.display = 'none';
-    splash.style.transform = '';
-  }, 1000);
+  // Curtain wipe up + content slides
+  requestAnimationFrame(function(){
+    splash.classList.add('closing');
+    setTimeout(function(){
+      splash.style.display = 'none';
+    }, 1050);
+  });
   audio.play().then(function(){
     playing = true;
     musicBtn.classList.add('playing');
