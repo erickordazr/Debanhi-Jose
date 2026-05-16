@@ -941,9 +941,6 @@ body.plural   .txt-plural{display:inline!important;}
     <!-- divisor dorado -->
     <div class="splash-divider"></div>
 
-    <!-- fecha -->
-    <p class="splash-date">Sábado · 01 · Agosto · 2026</p>
-
     <!-- cita -->
     <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
 
@@ -965,7 +962,7 @@ body.plural   .txt-plural{display:inline!important;}
       <div class="splash-ring">
         <div class="splash-ring-inner"></div>
       </div>
-      <p class="splash-hint"><span class="txt-plural">Es para ustedes</span><span class="txt-singular" style="display:none;">Es para ti</span></p>
+      <p class="splash-hint">Abre tu invitación</p>
     </div>
 
   </div>
@@ -1262,65 +1259,40 @@ body.plural   .txt-plural{display:inline!important;}
 </div>
 
 <!-- RSVP -->
-<div class="section section-dusty">
-  <span class="section-title reveal" style="color:var(--dark);">Confirmación de asistencia</span>
-  <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="body-text reveal d2"><span class="txt-plural">Les agradecemos confirmar su asistencia antes del</span><span class="txt-singular" style="display:none;">Te agradecemos confirmar tu asistencia antes del</span> <strong style="white-space:nowrap;">30 de junio de 2026</strong></p>
+<div class="section section-dusty" style="text-align:center;">
 
-  <!-- FORM -->
+  <span class="section-title reveal">Confirmación de asistencia</span>
+  <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+
   <div id="rsvpWrap" class="reveal d2" style="margin-top:36px;max-width:460px;margin-left:auto;margin-right:auto;">
+
+    <div id="rsvpSuccess" style="display:none;text-align:center;padding:40px 0;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,26px);color:var(--dark);line-height:1.7;">¡Gracias por confirmar!<br><span style="font-style:italic;font-size:0.85em;color:var(--muted);">Los esperamos con mucho cariño.</span></p>
+    </div>
 
     <form id="rsvpForm" style="display:flex;flex-direction:column;gap:0;">
 
-      <!-- Nombre -->
-      <div class="rsvp-field">
-        <label class="rsvp-label">Nombre completo</label>
-        <p class="rsvp-sublabel">Un registro por invitado, por favor</p>
-        <input id="rsvpNombre" type="text" class="rsvp-input" placeholder="Tu nombre completo" required>
+      <p class="body-text reveal d1" style="margin-bottom:28px;">
+        <span class="txt-plural">Les agradecemos confirmar su asistencia antes del</span><span class="txt-singular" style="display:none;">Te agradecemos confirmar tu asistencia antes del</span>
+        <strong style="white-space:nowrap;">30 de junio de 2026</strong>
+      </p>
+      <div id="rsvpGuests"></div>
+
+      <div style="border:1px solid rgba(122,147,168,0.18);border-radius:3px;padding:clamp(20px,4vw,28px);margin-bottom:16px;text-align:left;background:rgba(255,255,255,0.35);">
+        <label class="rsvp-label">Mensaje para los novios</label>
+        <p class="rsvp-sublabel" style="margin-bottom:12px;">Opcional</p>
+        <textarea id="rsvpMensaje" class="rsvp-input" rows="3" placeholder="Escribe algo bonito..." style="resize:none;"></textarea>
       </div>
 
-      <!-- Ceremonia -->
-      <div class="rsvp-field">
-        <label class="rsvp-label">¿Asistirás a la Ceremonia Religiosa?</label>
-        <p class="rsvp-sublabel">2:00 pm · Parroquia Sagrado Corazón de Jesús</p>
-        <div class="rsvp-toggle-group" id="togCeremonia">
-          <button type="button" class="rsvp-toggle" data-val="Sí" onclick="selectToggle('togCeremonia',this)">Sí</button>
-          <button type="button" class="rsvp-toggle" data-val="No" onclick="selectToggle('togCeremonia',this)">No</button>
-        </div>
-      </div>
+      <p id="rsvpError" style="display:none;font-family:'Cormorant Garamond',serif;font-size:clamp(13px,2vw,15px);font-style:italic;color:#c0614d;margin:12px 0;text-align:left;"></p>
 
-      <!-- Recepción -->
-      <div class="rsvp-field">
-        <label class="rsvp-label">¿Asistirás a la Recepción?</label>
-        <p class="rsvp-sublabel">6:00 pm · Los Pinos 112</p>
-        <div class="rsvp-toggle-group" id="togRecepcion">
-          <button type="button" class="rsvp-toggle" data-val="Sí" onclick="selectToggle('togRecepcion',this)">Sí</button>
-          <button type="button" class="rsvp-toggle" data-val="No" onclick="selectToggle('togRecepcion',this)">No</button>
-        </div>
-      </div>
-
-      <!-- Mensaje -->
-      <div class="rsvp-field">
-        <label class="rsvp-label">Mensaje para los novios <span style="opacity:0.5;font-size:clamp(12px,2vw,13px);">(opcional)</span></label>
-        <textarea id="rsvpMensaje" class="rsvp-input" rows="3" placeholder="Escribe algo bonito..."></textarea>
-      </div>
-
-      <!-- Error -->
-      <p id="rsvpError" style="display:none;font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:2px;color:var(--dusty);text-align:center;margin-top:8px;"></p>
-
-      <!-- Submit -->
       <button type="submit" class="btn-rsvp" style="margin-top:28px;width:100%;max-width:320px;display:block;margin-left:auto;margin-right:auto;border:1px solid var(--dark);color:var(--dark);">
-        <span id="rsvpBtnText">Confirmar asistencia</span>
+        <span style="position:relative;z-index:1;">Confirmar asistencia</span>
       </button>
 
+
+
     </form>
-
-    <!-- Gracias -->
-    <div id="rsvpThanks" style="display:none;text-align:center;padding:32px 0;">
-      <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2.2vw,14px);letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">¡Gracias!</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.6vw,20px);font-style:italic;color:var(--muted);line-height:1.8;">Tu confirmación ha sido registrada.<br>¡Nos vemos pronto! 🤍</p>
-    </div>
-
   </div>
 </div>
 
@@ -1567,59 +1539,101 @@ function copiarCLABE() {
 }
 
 /* ══ RSVP FORM ══ */
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPWFvKm_cRWqsI4RPkPUCSzoMLb2g6tM0RCSgU7oT_MWqdUH8kUrdRWvfK-Fyr3P3X/exec';
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbyGAnPbsd4S7kT761KX2wwM4GiAo_o4tvhLf2mIekrJI6DGhr8SZVB8DRe6kppuD6_M/exec';
 
-function selectToggle(groupId, btn) {
-  var group = document.getElementById(groupId);
-  group.querySelectorAll('.rsvp-toggle').forEach(function(b){ b.classList.remove('selected'); });
+function buildGuestFields(){
+  var num=(window.guestNum&&window.guestNum>0)?window.guestNum:1;
+  var container=document.getElementById('rsvpGuests');
+  if(!container)return;
+  container.innerHTML='';
+  for(var i=0;i<num;i++){
+    var label=num>1?'Invitado '+(i+1):'Tu nombre';
+    var h='<div class="rsvp-field" style="padding-bottom:28px;border-bottom:1px solid rgba(122,147,168,0.15);margin-bottom:4px;">';
+    h+='<label class="rsvp-label">'+label+'</label>';
+    h+='<p class="rsvp-sublabel">Escribe el nombre aunque no pueda asistir</p>';
+    h+='<input type="text" class="rsvp-input guest-name" placeholder="Nombre completo" data-idx="'+i+'">';
+    h+='<div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">';
+    h+='<div style="flex:1;min-width:130px;">';
+    h+='<p class="rsvp-label" style="margin-bottom:8px;">¿Asistirá a la ceremonia religiosa?</p>';
+    h+='<div style="display:flex;gap:8px;">';
+    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="'+i+'" data-tipo="cer" data-val="Si" onclick="selectToggle(this)">Sí</button>';
+    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="'+i+'" data-tipo="cer" data-val="No" onclick="selectToggle(this)">No</button>';
+    h+='</div></div>';
+    h+='<div style="flex:1;min-width:130px;">';
+    h+='<p class="rsvp-label" style="margin-bottom:8px;">¿Asistirá a la recepción?</p>';
+    h+='<div style="display:flex;gap:8px;">';
+    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="'+i+'" data-tipo="rec" data-val="Si" onclick="selectToggle(this)">Sí</button>';
+    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="'+i+'" data-tipo="rec" data-val="No" onclick="selectToggle(this)">No</button>';
+    h+='</div></div>';
+    h+='</div></div>';
+    container.innerHTML+=h;
+  }
+}
+
+function selectToggle(btn,tipo,idx){
+  var cls=tipo+'-btn';
+  document.querySelectorAll('.'+cls+'[data-idx="'+idx+'"]').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
 }
 
-document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+document.addEventListener('DOMContentLoaded',function(){buildGuestFields();});
+
+document.getElementById('rsvpForm').addEventListener('submit',function(e){
   e.preventDefault();
+  var errEl=document.getElementById('rsvpError');
+  errEl.style.display='none';
+  var names=document.querySelectorAll('.guest-name');
+  var invitados=[];
+  var valid=true;
 
-  var nombre    = document.getElementById('rsvpNombre').value.trim();
-  var ceremonia = document.querySelector('#togCeremonia .rsvp-toggle.selected');
-  var recepcion = document.querySelector('#togRecepcion .rsvp-toggle.selected');
-  var mensaje   = document.getElementById('rsvpMensaje').value.trim();
-  var errorEl   = document.getElementById('rsvpError');
-  var btnText   = document.getElementById('rsvpBtnText');
+  for(var i=0;i<names.length;i++){
+    var nombre=names[i].value.trim();
+    if(!nombre){
+      errEl.textContent='Por favor escribe el nombre del invitado '+(i+1)+', o escribe "NA" para liberar el espacio.';
+      errEl.style.display='block';
+      names[i].focus();
+      valid=false;break;
+    }
+    var cerBtn=document.querySelector('.cer-btn[data-idx="'+i+'"].selected');
+    var recBtn=document.querySelector('.rec-btn[data-idx="'+i+'"].selected');
+    invitados.push({
+      nombre:nombre,
+      ceremonia:cerBtn?cerBtn.dataset.val:'Sin confirmar',
+      recepcion:recBtn?recBtn.dataset.val:'Sin confirmar'
+    });
+  }
+  if(!valid)return;
 
-  // Validación
-  if (!nombre) { showError('Por favor escribe tu nombre'); return; }
-  if (!ceremonia) { showError('Indica si asistirás a la ceremonia'); return; }
-  if (!recepcion) { showError('Indica si asistirás a la recepción'); return; }
-
-  errorEl.style.display = 'none';
-  btnText.textContent = 'Enviando...';
-
-  var data = {
-    nombre:    nombre,
-    ceremonia: ceremonia.dataset.val,
-    recepcion: recepcion.dataset.val,
-    mensaje:   mensaje
+  var payload={
+    grupo:window.guestNombre||'Invitado directo',
+    invitados:invitados,
+    mensaje:document.getElementById('rsvpMensaje').value.trim()
   };
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-  .then(function() {
-    document.getElementById('rsvpForm').style.display = 'none';
-    document.getElementById('rsvpThanks').style.display = 'block';
-  })
-  .catch(function() {
-    showError('Hubo un error, intenta de nuevo');
-    btnText.textContent = 'Confirmar asistencia';
-  });
+  var submitBtn=e.target.querySelector('button[type=submit]');
+  submitBtn.disabled=true;
+  submitBtn.querySelector('span').textContent='Enviando...';
 
-  function showError(msg) {
-    errorEl.textContent = msg;
-    errorEl.style.display = 'block';
-  }
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      if(res.result==='ok'){
+        document.getElementById('rsvpForm').style.display='none';
+        document.getElementById('rsvpSuccess').style.display='block';
+      } else {
+        submitBtn.disabled=false;
+        submitBtn.querySelector('span').textContent='Confirmar asistencia';
+        errEl.textContent='Hubo un error, intenta de nuevo.';
+        errEl.style.display='block';
+      }
+    }).catch(function(){
+      submitBtn.disabled=false;
+      submitBtn.querySelector('span').textContent='Confirmar asistencia';
+      errEl.textContent='Hubo un error de conexión, intenta de nuevo.';
+      errEl.style.display='block';
+    });
 });
+
 </script>
 </body>
 </html>
