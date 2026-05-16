@@ -678,8 +678,9 @@ body{
 }
 .closing-script{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(52px,12vw,92px);color:#fff;line-height:1.1;position:relative;
+  font-size:clamp(40px,9vw,80px);color:#fff;line-height:1.1;position:relative;
   text-shadow:0 4px 40px rgba(0,0,0,0.25);
+  white-space:nowrap;
 }
 .closing-amp{color:var(--dusty3);}
 .closing-date{
@@ -937,39 +938,20 @@ body.plural   .txt-plural{display:inline!important;}
   <canvas id="splashCanvas"></canvas>
   <div class="splash-inner">
 
-    <!-- ornamento superior -->
-    <div class="splash-ornament" style="animation:splashIn 1.2s ease both;">
-      <div class="splash-orn-line"></div>
-      <div class="splash-orn-diamond"></div>
-      <div class="splash-orn-line right"></div>
-    </div>
-
     <!-- nombres novios -->
     <div class="splash-names" style="margin:0;">Debanhi <span class="splash-amp">&</span> José</div>
 
-    <!-- nombre invitado — debajo de nombres, encima de divisor -->
+    <!-- nombre invitado -->
     <div id="splashGuest" style="display:none;width:100%;animation:splashIn 1.2s 0.2s ease both;opacity:0;text-align:center;">
-      <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:10px;width:min(160px,40vw);margin-left:auto;margin-right:auto;">
-        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,0.3));"></div>
-        <div style="width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;flex-shrink:0;"></div>
-        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(201,169,110,0.3));"></div>
-      </div>
-      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5.5vw,34px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.92);letter-spacing:0.5px;line-height:1.2;"></p>
-      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.6);margin-top:5px;"></p>
+      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5vw,30px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.85);letter-spacing:0.5px;line-height:1.2;margin-top:4px;"></p>
+      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.55);margin-top:6px;"></p>
     </div>
 
     <!-- divisor dorado -->
     <div class="splash-divider" style="margin:0;"></div>
 
-    <!-- cita bíblica — antes del CTA -->
+    <!-- cita bíblica -->
     <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
-
-    <!-- ornamento inferior -->
-    <div class="splash-ornament" style="margin:0;">
-      <div class="splash-orn-line"></div>
-      <div class="splash-orn-diamond"></div>
-      <div class="splash-orn-line right"></div>
-    </div>
 
     <!-- CTA -->
     <div class="splash-btn">
@@ -1594,6 +1576,9 @@ function buildGuestFields(){
   window._rsvpData=[];
   for(var j=0;j<num;j++) window._rsvpData.push({nombre:'',ceremonia:'',recepcion:''});
 
+  var ordinals=['primer','segundo','tercer','cuarto','quinto','sexto','séptimo','octavo','noveno','décimo'];
+  function ordinal(i){ return ordinals[i]||((i+1)+'°'); }
+
   // Progress bar
   var prog='<div id="rsvpProgress" style="display:flex;gap:6px;justify-content:center;margin-bottom:24px;">';
   for(var j=0;j<num;j++){
@@ -1603,9 +1588,8 @@ function buildGuestFields(){
 
   // Guest card
   var card='<div id="rsvpWizardCard" style="border:1px solid rgba(122,147,168,0.2);border-radius:3px;padding:clamp(18px,4vw,26px);text-align:left;background:rgba(255,255,255,0.4);">';
-  card+='<p id="rsvpStepLabel" class="rsvp-label" style="margin-bottom:10px;">Invitado 1 de '+num+'</p>';
-  card+='<p class="rsvp-label" style="margin-bottom:10px;">Nombre completo</p>';
-  card+='<input type="text" id="rsvpWizardName" class="rsvp-input" placeholder="Nombre completo del invitado 1" style="margin-bottom:20px;">';
+  card+='<p id="rsvpStepLabel" class="rsvp-label" style="margin-bottom:10px;">Nombre del '+ordinal(0)+' invitado</p>';
+  card+='<input type="text" id="rsvpWizardName" class="rsvp-input" placeholder="Nombre del '+ordinal(0)+' invitado" style="margin-bottom:20px;">';
   card+='<p class="rsvp-label" style="margin-bottom:10px;">'+qcer+'</p>';
   card+='<div style="display:flex;gap:10px;margin-bottom:20px;">';
   card+='<button type="button" class="rsvp-toggle cer-btn" data-tipo="cer" data-val="Si" onclick="wizToggle(this)" style="flex:1;">Sí</button>';
@@ -1622,6 +1606,7 @@ function buildGuestFields(){
   card+='</div></div>';
 
   container.innerHTML=prog+card;
+  window._ordinal=ordinal;
   updateDot(0);
 }
 
@@ -1673,10 +1658,11 @@ function wizNext(){
   window._rsvpStep=step;
 
   if(step<num){
+    var ordFn=window._ordinal||function(i){return (i+1)+'°';};
     // Next guest
-    document.getElementById('rsvpStepLabel').textContent='Invitado '+(step+1)+' de '+num;
+    document.getElementById('rsvpStepLabel').textContent='Nombre del '+ordFn(step)+' invitado';
     document.getElementById('rsvpWizardName').value='';
-    document.getElementById('rsvpWizardName').placeholder='Nombre completo del invitado '+(step+1);
+    document.getElementById('rsvpWizardName').placeholder='Nombre del '+ordFn(step)+' invitado';
     // Reset ALL toggle buttons — remove selected class, reset only visual inline overrides
     document.querySelectorAll('#rsvpWizardCard .rsvp-toggle').forEach(function(b){
       b.classList.remove('selected');
