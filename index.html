@@ -930,24 +930,32 @@ img{transition:opacity 0.4s ease;}
       <div class="splash-orn-line right"></div>
     </div>
 
-    <!-- nombres -->
+    <!-- nombre invitado arriba de los nombres -->
+    <div id="splashGuest" style="display:none;margin-bottom:18px;animation:splashIn 1.2s 0.1s ease both;opacity:0;text-align:center;">
+      <p style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Para</p>
+      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5vw,32px);font-weight:300;color:rgba(255,255,255,0.92);letter-spacing:1px;line-height:1.2;"></p>
+      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.65);margin-top:6px;"></p>
+      <div style="width:40px;height:1px;background:rgba(201,169,110,0.3);margin:18px auto 0;"></div>
+    </div>
+
+    <!-- nombres novios -->
     <div class="splash-names">Debanhi <span class="splash-amp">&</span> José</div>
 
-    <!-- línea divisora dorada -->
+    <!-- divisor dorado -->
     <div class="splash-divider"></div>
 
     <!-- fecha -->
     <p class="splash-date">Sábado · 01 · Agosto · 2026</p>
 
-    <!-- nombre invitado (solo aparece si hay URL param) -->
-    <div id="splashGuest" style="display:none;margin-top:20px;animation:splashIn 1.2s 0.5s ease both;opacity:0;">
-      <p style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">Para</p>
-      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,28px);font-weight:300;color:rgba(255,255,255,0.9);letter-spacing:1px;line-height:1.3;"></p>
-      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.7);margin-top:6px;"></p>
-    </div>
+    <!-- cita -->
+    <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
 
-    <!-- frase -->
-    <p class="splash-tagline">"Yo soy de mi amado, y mi amado es mío."<br><span style="font-size:0.85em;opacity:0.6;letter-spacing:3px;">Cantares 6:3</span></p>
+    <!-- ornamento inferior -->
+    <div class="splash-ornament" style="margin-top:clamp(18px,3vw,28px);margin-bottom:0;">
+      <div class="splash-orn-line"></div>
+      <div class="splash-orn-diamond"></div>
+      <div class="splash-orn-line right"></div>
+    </div>
 
     <!-- CTA -->
     <div class="splash-btn">
