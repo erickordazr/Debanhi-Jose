@@ -144,8 +144,8 @@ body{
 
 /* CTA */
 .splash-btn{
-  margin-top:clamp(40px,7vw,64px);
-  display:flex;flex-direction:column;align-items:center;gap:16px;
+  margin-top:clamp(20px,4vw,36px);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
   animation:splashIn 1.2s 0.75s ease both;opacity:0;
 }
 .splash-ring{
@@ -939,7 +939,7 @@ body.plural   .txt-plural{display:inline!important;}
     </div>
 
     <!-- nombres novios -->
-    <div class="splash-names">Debanhi <span class="splash-amp">&</span> José</div>
+    <div class="splash-names" style="margin-bottom:0;">Debanhi <span class="splash-amp">&</span> José</div>
 
     <!-- nombre invitado — debajo de nombres, encima de divisor -->
     <div id="splashGuest" style="display:none;width:100%;margin-top:clamp(16px,3vw,24px);animation:splashIn 1.2s 0.2s ease both;opacity:0;text-align:center;">
@@ -959,7 +959,7 @@ body.plural   .txt-plural{display:inline!important;}
     <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
 
     <!-- ornamento inferior -->
-    <div class="splash-ornament" style="margin-top:clamp(14px,3vw,22px);margin-bottom:0;">
+    <div class="splash-ornament" style="margin-top:clamp(14px,3vw,22px);margin-bottom:0;width:100%;">
       <div class="splash-orn-line"></div>
       <div class="splash-orn-diamond"></div>
       <div class="splash-orn-line right"></div>
@@ -1619,7 +1619,15 @@ function buildGuestFields(){
 
 function wizToggle(btn){
   var tipo=btn.getAttribute('data-tipo');
-  document.querySelectorAll('[data-tipo="'+tipo+'"].rsvp-toggle').forEach(function(b){b.classList.remove('selected');});
+  // Remove selected from ALL toggles of this type in the wizard card
+  var card=document.getElementById('rsvpWizardCard');
+  if(card){
+    card.querySelectorAll('[data-tipo="'+tipo+'"]').forEach(function(b){
+      b.classList.remove('selected');
+      b.style.background='';
+      b.style.color='';
+    });
+  }
   btn.classList.add('selected');
 }
 
@@ -1661,7 +1669,15 @@ function wizNext(){
     document.getElementById('rsvpStepLabel').textContent='Invitado '+(step+1)+' de '+num;
     document.getElementById('rsvpWizardName').value='';
     document.getElementById('rsvpWizardName').placeholder='Nombre completo del invitado '+(step+1);
-    document.querySelectorAll('.rsvp-toggle').forEach(function(b){b.classList.remove('selected');});
+    // Clear ALL toggle selected states for next guest
+    var wCard=document.getElementById('rsvpWizardCard');
+    if(wCard){
+      wCard.querySelectorAll('.rsvp-toggle').forEach(function(b){
+        b.classList.remove('selected');
+        b.style.background='';
+        b.style.color='';
+      });
+    }
     // Reset wizard button
     var wizBtn=document.querySelector('#rsvpWizardCard button');
     if(wizBtn){
