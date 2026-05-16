@@ -83,7 +83,7 @@ body{
   position:relative;z-index:2;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  gap:clamp(12px,2.8vw,20px);
+  gap:clamp(10px,2.2vw,16px);
 }
 
 /* Eyebrow date above names */
@@ -153,19 +153,20 @@ body{
 /* Tagline */
 .splash-tagline{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(17px,3.2vw,22px);font-style:italic;
-  color:rgba(255,255,255,0.5);
+  font-size:clamp(14px,2.4vw,17px);font-style:italic;
+  color:rgba(255,255,255,0.38);
   margin-top:0;
   letter-spacing:0.3px;
-  line-height:1.8;
-  animation:splashIn 1.2s 0.5s ease both;opacity:0;
+  line-height:1.9;
+  animation:splashIn 1.2s 0.55s ease both;opacity:0;
+  text-align:center;
 }
 
 /* CTA */
 .splash-btn{
-  margin-top:4px;
+  margin-top:8px;
   display:flex;flex-direction:column;align-items:center;gap:10px;
-  animation:splashIn 1.2s 0.7s ease both;opacity:0;
+  animation:splashIn 1.2s 0.75s ease both;opacity:0;
 }
 .splash-ring{
   width:clamp(52px,10vw,72px);height:clamp(52px,10vw,72px);
@@ -411,13 +412,14 @@ body{
   grid-template-columns:1fr 1px 1fr;
   gap:0 clamp(20px,4vw,48px);
   margin:36px auto 0;
-  max-width:520px;
+  max-width:660px;
 }
 .parents-sep{background:var(--line);}
 .parents-role{
   display:block;font-family:'Cinzel',serif;
   font-size:11px;letter-spacing:4px;text-transform:uppercase;
   color:var(--sage);margin-bottom:14px;
+  white-space:nowrap;
 }
 .parents-name{
   font-family:'Cormorant Garamond',serif;
@@ -950,21 +952,24 @@ body.plural   .txt-plural{display:inline!important;}
   <canvas id="splashCanvas"></canvas>
   <div class="splash-inner">
 
-    <!-- nombres novios — protagonistas -->
+    <!-- fecha eyebrow — contexto inmediato, sutil -->
+    <p class="splash-eyebrow">01 · Agosto · 2026</p>
+
+    <!-- nombres novios — protagonistas absolutos -->
     <div class="splash-names">Debanhi <span class="splash-amp">&</span> José</div>
 
-    <!-- cita bíblica — inmediatamente bajo los nombres -->
-    <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;opacity:0.5;">Cantares 6:3</span></p>
-
-    <!-- divisor dorado — separa novios del bloque invitado -->
+    <!-- divisor dorado — respira bajo los nombres -->
     <div class="splash-divider"></div>
 
-    <!-- bloque invitado — conecta con el CTA -->
+    <!-- bloque invitado — nombre personalizado -->
     <div class="splash-guest-block" id="splashGuest">
       <span class="splash-guest-label">Invitación para</span>
       <p class="splash-guest-name" id="splashGuestName"></p>
       <span class="splash-guest-seats" id="splashGuestSeats"></span>
     </div>
+
+    <!-- cita bíblica — cierre poético, sutil -->
+    <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;opacity:0.45;">Cantares 6:3</span></p>
 
     <!-- CTA -->
     <div class="splash-btn">
