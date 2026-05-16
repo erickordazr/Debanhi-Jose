@@ -1306,7 +1306,7 @@ body.plural   .txt-plural{display:inline!important;}
   <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
   <p class="closing-date reveal d1">01 · Agosto · 2026</p>
   <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
-  <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);">¡Te esperamos!</p>
+  <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
   <div class="reveal d3" style="margin-top:48px;margin-bottom:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
     <div class="closing-line-animated" style="animation-delay:0.2s;"></div>
     <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.6;"></div>
@@ -1547,11 +1547,11 @@ function buildGuestFields(){
   if(!container)return;
   container.innerHTML='';
   for(var i=0;i<num;i++){
-    var label=num>1?'Invitado '+(i+1):'Tu nombre';
+    var label=num>1?'Nombre completo del invitado '+(i+1):'Nombre completo';
     var h='<div class="rsvp-field" style="padding-bottom:28px;border-bottom:1px solid rgba(122,147,168,0.15);margin-bottom:4px;">';
     h+='<label class="rsvp-label">'+label+'</label>';
-    h+='<p class="rsvp-sublabel">Escribe el nombre aunque no pueda asistir</p>';
-    h+='<input type="text" class="rsvp-input guest-name" placeholder="Nombre completo" data-idx="'+i+'">';
+    h+='';
+    h+='<input type="text" class="rsvp-input guest-name" placeholder="Tu nombre completo" data-idx="'+i+'">';
     h+='<div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">';
     h+='<div style="flex:1;min-width:130px;">';
     h+='<p class="rsvp-label" style="margin-bottom:8px;">¿Asistirá a la ceremonia religiosa?</p>';
@@ -1570,9 +1570,10 @@ function buildGuestFields(){
   }
 }
 
-function selectToggle(btn,tipo,idx){
-  var cls=tipo+'-btn';
-  document.querySelectorAll('.'+cls+'[data-idx="'+idx+'"]').forEach(function(b){b.classList.remove('selected');});
+function selectToggle(btn){
+  var tipo=btn.getAttribute('data-tipo');
+  var idx=btn.getAttribute('data-idx');
+  document.querySelectorAll('[data-tipo="'+tipo+'"][data-idx="'+idx+'"]').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
 }
 
@@ -1589,17 +1590,17 @@ document.getElementById('rsvpForm').addEventListener('submit',function(e){
   for(var i=0;i<names.length;i++){
     var nombre=names[i].value.trim();
     if(!nombre){
-      errEl.textContent='Por favor escribe el nombre del invitado '+(i+1)+', o escribe "NA" para liberar el espacio.';
+      errEl.textContent='Por favor escribe el nombre completo del invitado '+(i+1)+'.';
       errEl.style.display='block';
       names[i].focus();
       valid=false;break;
     }
-    var cerBtn=document.querySelector('.cer-btn[data-idx="'+i+'"].selected');
-    var recBtn=document.querySelector('.rec-btn[data-idx="'+i+'"].selected');
+    var cerBtn=document.querySelector('[data-tipo="cer"][data-idx="'+i+'"].selected');
+    var recBtn=document.querySelector('[data-tipo="rec"][data-idx="'+i+'"].selected');
     invitados.push({
       nombre:nombre,
-      ceremonia:cerBtn?cerBtn.dataset.val:'Sin confirmar',
-      recepcion:recBtn?recBtn.dataset.val:'Sin confirmar'
+      ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
+      recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
     });
   }
   if(!valid)return;
