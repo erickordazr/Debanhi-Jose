@@ -914,6 +914,11 @@ img{transition:opacity 0.4s ease;}
   cursor:default;
 }
 .swatch:hover{transform:scale(1.15);}
+/* singular/plural switching */
+body.singular .txt-plural{display:none!important;}
+body.singular .txt-singular{display:inline!important;}
+body.plural   .txt-singular{display:none!important;}
+body.plural   .txt-plural{display:inline!important;}
 </style>
 </head>
 <body>
@@ -930,14 +935,6 @@ img{transition:opacity 0.4s ease;}
       <div class="splash-orn-line right"></div>
     </div>
 
-    <!-- nombre invitado arriba de los nombres -->
-    <div id="splashGuest" style="display:none;margin-bottom:18px;animation:splashIn 1.2s 0.1s ease both;opacity:0;text-align:center;">
-      <p style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Para</p>
-      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5vw,32px);font-weight:300;color:rgba(255,255,255,0.92);letter-spacing:1px;line-height:1.2;"></p>
-      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.65);margin-top:6px;"></p>
-      <div style="width:40px;height:1px;background:rgba(201,169,110,0.3);margin:18px auto 0;"></div>
-    </div>
-
     <!-- nombres novios -->
     <div class="splash-names">Debanhi <span class="splash-amp">&</span> José</div>
 
@@ -949,6 +946,14 @@ img{transition:opacity 0.4s ease;}
 
     <!-- cita -->
     <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
+
+    <!-- nombre invitado — entre cita y CTA -->
+    <div id="splashGuest" style="display:none;margin-top:clamp(20px,4vw,32px);animation:splashIn 1.2s 0.65s ease both;opacity:0;text-align:center;">
+      <div style="width:40px;height:1px;background:rgba(201,169,110,0.25);margin:0 auto 16px;"></div>
+      <p style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Para</p>
+      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5vw,30px);font-weight:300;color:rgba(255,255,255,0.92);letter-spacing:1px;line-height:1.2;"></p>
+      <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.65);margin-top:6px;"></p>
+    </div>
 
     <!-- ornamento inferior -->
     <div class="splash-ornament" style="margin-top:clamp(18px,3vw,28px);margin-bottom:0;">
@@ -1029,7 +1034,7 @@ img{transition:opacity 0.4s ease;}
 
 <!-- FECHA -->
 <div class="section section-warm">
-  <span class="section-title reveal" style="margin-bottom:0;">Con alegría los invitamos a celebrar nuestra boda</span>
+  <span class="section-title reveal" style="margin-bottom:0;"><span class="txt-plural">Con alegría los invitamos a celebrar nuestra boda</span><span class="txt-singular" style="display:none;">Con alegría te invitamos a celebrar nuestra boda</span></span>
 
   <div class="reveal d2" style="margin-top:0;text-align:center;position:relative;">
 
@@ -1208,7 +1213,7 @@ img{transition:opacity 0.4s ease;}
 <div class="section section-ivory">
   <span class="section-title reveal">Regalos</span>
   <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="body-text reveal d2">Nos llena de alegría compartir este momento tan especial contigo. Tu presencia será el mejor regalo para nosotros; sin embargo, si deseas obsequiarnos un detalle adicional, ponemos a tu disposición los siguientes datos bancarios.</p>
+  <p class="body-text reveal d2"><span class="txt-plural">Nos llena de alegría compartir este momento tan especial contigo. Tu presencia será el mejor regalo para nosotros; sin embargo, si deseas obsequiarnos un detalle adicional, ponemos a tu disposición los siguientes datos bancarios.</span><span class="txt-singular" style="display:none;">Nos llena de alegría compartir este momento tan especial contigo. Tu presencia será el mejor regalo para nosotros; sin embargo, si deseas obsequiarnos un detalle adicional, ponemos a tu disposición los siguientes datos bancarios.</span></p>
 
   <div class="reveal d2" style="margin-top:36px;max-width:400px;margin-left:auto;margin-right:auto;">
     <div style="border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--ivory3);">
@@ -1262,7 +1267,7 @@ img{transition:opacity 0.4s ease;}
 <div class="section section-dusty">
   <span class="section-title reveal" style="color:var(--dark);">Confirmación de asistencia</span>
   <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="body-text reveal d2">Les agradecemos confirmar su asistencia antes del <strong style="white-space:nowrap;">30 de junio de 2026</strong></p>
+  <p class="body-text reveal d2"><span class="txt-plural">Les agradecemos confirmar su asistencia antes del</span><span class="txt-singular" style="display:none;">Te agradecemos confirmar tu asistencia antes del</span> <strong style="white-space:nowrap;">30 de junio de 2026</strong></p>
 
   <!-- FORM -->
   <div id="rsvpWrap" class="reveal d2" style="margin-top:36px;max-width:460px;margin-left:auto;margin-right:auto;">
@@ -1330,7 +1335,7 @@ img{transition:opacity 0.4s ease;}
   </div>
   <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
   <p class="closing-date reveal d1">01 · Agosto · 2026</p>
-  <p class="closing-msg reveal d2">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</p>
+  <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
   <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);">¡Te esperamos!</p>
   <div class="reveal d3" style="margin-top:48px;margin-bottom:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
     <div class="closing-line-animated" style="animation-delay:0.2s;"></div>
@@ -1373,6 +1378,9 @@ img{transition:opacity 0.4s ease;}
   var num = invitados ? parseInt(invitados) : 1;
   window.guestNombre = nombre;
   window.guestNum = num;
+
+  // Set singular/plural body class
+  document.body.classList.add(num > 1 ? 'plural' : 'singular');
 
   // Show name in splash
   var splashGuest = document.getElementById('splashGuest');
