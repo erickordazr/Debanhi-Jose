@@ -1285,16 +1285,18 @@ body.plural   .txt-plural{display:inline!important;}
         <textarea id="rsvpMensaje" class="rsvp-input" rows="3" placeholder="Escribe algo bonito..." style="resize:none;"></textarea>
       </div></div>
 
-      <div id="rsvpSubmitWrap">
+      <div id="rsvpSubmitWrap" style="margin-top:8px;">
       <p id="rsvpError" style="display:none;font-family:'Cormorant Garamond',serif;font-size:clamp(13px,2vw,15px);font-style:italic;color:#c0614d;margin:12px 0;text-align:left;"></p>
 
-      <button type="submit" class="btn-rsvp" style="margin-top:48px;width:100%;display:block;border:1px solid var(--dark);color:var(--dark);">
+      <button type="submit" class="btn-rsvp" style="margin-top:24px;width:100%;display:block;border:1px solid var(--dark);color:var(--dark);">
         <span style="position:relative;z-index:1;">Confirmar asistencia</span>
       </button>
 
     </form>
   </div>
 </div>
+
+</div><!-- /page-wrap -->
 
 <!-- CIERRE -->
 <div class="closing">
@@ -1313,8 +1315,6 @@ body.plural   .txt-plural{display:inline!important;}
     <div class="closing-line-animated" style="animation-delay:0.5s;"></div>
   </div>
 </div>
-
-</div><!-- /page-wrap -->
 
 <script>
 /* ══ SPLASH PARTICLES ══ */
@@ -1539,7 +1539,7 @@ function copiarCLABE() {
 }
 
 /* ══ RSVP FORM ══ */
-var SCRIPT_URL='https://script.google.com/macros/s/AKfycbyGAnPbsd4S7kT761KX2wwM4GiAo_o4tvhLf2mIekrJI6DGhr8SZVB8DRe6kppuD6_M/exec';
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbx1bfvOTQIQdU-jIcyGrqCuiu4G_YKNGpLy13_oNb-zssD2s38twQROKAo-s-EYmWQ/exec';
 
 function buildGuestFields(){
   var num=(window.guestNum&&window.guestNum>0)?window.guestNum:1;
@@ -1731,18 +1731,15 @@ document.getElementById('rsvpForm').addEventListener('submit',function(e){
   submitBtn.disabled=true;
   submitBtn.querySelector('span').textContent='Enviando...';
 
-  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)})
-    .then(function(r){return r.json();})
-    .then(function(res){
-      if(res.result==='ok'){
-        document.getElementById('rsvpForm').style.display='none';
-        document.getElementById('rsvpSuccess').style.display='block';
-      } else {
-        submitBtn.disabled=false;
-        submitBtn.querySelector('span').textContent='Confirmar asistencia';
-        errEl.textContent='Hubo un error, intenta de nuevo.';
-        errEl.style.display='block';
-      }
+  fetch(SCRIPT_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain'},
+    body:JSON.stringify(payload)
+  })
+    .then(function(){
+      document.getElementById('rsvpForm').style.display='none';
+      document.getElementById('rsvpSuccess').style.display='block';
     }).catch(function(){
       submitBtn.disabled=false;
       submitBtn.querySelector('span').textContent='Confirmar asistencia';
