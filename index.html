@@ -776,9 +776,10 @@ body::before{
   height:1px;
   width:0;
   background:rgba(163,176,151,0.35);
-  max-width:120px;
+  max-width:clamp(60px,15vw,120px);
   animation:lineExpand 1.2s cubic-bezier(.4,0,.2,1) forwards;
   animation-play-state:paused;
+  flex-shrink:0;
 }
 .reveal.visible .closing-line-animated,
 .closing-line-animated.visible{
@@ -1309,16 +1310,18 @@ body.plural   .txt-plural{display:inline!important;}
 
 <!-- CIERRE -->
 <div class="closing">
-  <div class="reveal" style="margin-bottom:48px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+  <div class="reveal" style="margin-bottom:48px;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;overflow:hidden;">
     <div class="closing-line-animated"></div>
     <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.6;"></div>
     <div class="closing-line-animated" style="animation-delay:0.3s;"></div>
   </div>
-  <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
-  <p class="closing-date reveal d1">01 · Agosto · 2026</p>
-  <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
-  <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
-  <div class="reveal d3" style="margin-top:48px;margin-bottom:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
+  <div style="padding:0 clamp(20px,5vw,60px);">
+    <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
+    <p class="closing-date reveal d1">01 · Agosto · 2026</p>
+    <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
+    <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
+  </div>
+  <div class="reveal d3" style="margin-top:48px;margin-bottom:0;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;overflow:hidden;">
     <div class="closing-line-animated" style="animation-delay:0.2s;"></div>
     <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.6;"></div>
     <div class="closing-line-animated" style="animation-delay:0.5s;"></div>
@@ -1609,7 +1612,7 @@ function buildGuestFields(){
   card+='<button type="button" class="rsvp-toggle rec-btn" data-tipo="rec" data-val="No" onclick="wizToggle(this)" style="flex:1;">No</button>';
   card+='</div>';
   card+='<div style="display:flex;justify-content:flex-end;margin-top:20px;">';
-  card+='<button type="button" onclick="wizNext()" class="btn-rsvp no-fill" style="border:1px solid var(--dark);color:var(--dark);padding:12px 32px;overflow:hidden;">';
+  card+='<button type="button" onclick="wizNext()" class="btn-rsvp" style="border:1px solid var(--dark);color:var(--dark);width:100%;overflow:hidden;margin-top:8px;">';
   card+='<span>Siguiente</span></button>';
   card+='</div></div>';
 
@@ -1669,6 +1672,14 @@ function wizNext(){
     document.getElementById('rsvpStepLabel').textContent='Invitado '+(step+1)+' de '+num;
     document.getElementById('rsvpWizardName').value='';
     document.getElementById('rsvpWizardName').placeholder='Nombre completo del invitado '+(step+1);
+    // Force clear ALL selected states
+    document.querySelectorAll('.cer-btn,.rec-btn').forEach(function(b){
+      b.classList.remove('selected');
+      b.setAttribute('style', b.getAttribute('style')||'');
+      b.style.background='';
+      b.style.color='';
+      b.style.borderColor='';
+    });
     // Clear ALL toggle selected states for next guest
     var wCard=document.getElementById('rsvpWizardCard');
     if(wCard){
