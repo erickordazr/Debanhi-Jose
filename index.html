@@ -661,7 +661,7 @@ body{
 ══════════════════════════════ */
 .closing{
   background:var(--dark);
-  padding:clamp(72px,10vw,112px) clamp(28px,6vw,64px);
+  padding:clamp(96px,14vw,140px) clamp(28px,6vw,64px) clamp(72px,10vw,112px);
   text-align:center;position:relative;overflow:hidden;
   border-top:1px solid rgba(201,169,110,0.12);
 }
@@ -1278,19 +1278,19 @@ body.plural   .txt-plural{display:inline!important;}
       </p>
       <div id="rsvpGuests"></div>
 
+      <div id="rsvpMensajeWrap">
       <div style="border:1px solid rgba(122,147,168,0.18);border-radius:3px;padding:clamp(20px,4vw,28px);margin-bottom:16px;text-align:left;background:rgba(255,255,255,0.35);">
         <label class="rsvp-label">Mensaje para los novios</label>
         <p class="rsvp-sublabel" style="margin-bottom:12px;">Opcional</p>
         <textarea id="rsvpMensaje" class="rsvp-input" rows="3" placeholder="Escribe algo bonito..." style="resize:none;"></textarea>
-      </div>
+      </div></div>
 
+      <div id="rsvpSubmitWrap">
       <p id="rsvpError" style="display:none;font-family:'Cormorant Garamond',serif;font-size:clamp(13px,2vw,15px);font-style:italic;color:#c0614d;margin:12px 0;text-align:left;"></p>
 
-      <button type="submit" class="btn-rsvp" style="margin-top:28px;width:100%;max-width:320px;display:block;margin-left:auto;margin-right:auto;border:1px solid var(--dark);color:var(--dark);">
+      <button type="submit" class="btn-rsvp" style="margin-top:48px;width:100%;display:block;border:1px solid var(--dark);color:var(--dark);">
         <span style="position:relative;z-index:1;">Confirmar asistencia</span>
       </button>
-
-
 
     </form>
   </div>
@@ -1546,30 +1546,126 @@ function buildGuestFields(){
   var container=document.getElementById('rsvpGuests');
   if(!container)return;
   container.innerHTML='';
+
   var qcer=num===1?'¿Asistirás a la ceremonia religiosa?':'¿Asistirá a la ceremonia religiosa?';
   var qrec=num===1?'¿Asistirás a la recepción?':'¿Asistirá a la recepción?';
-  for(var i=0;i<num;i++){
-    var ph=num>1?'Nombre completo del invitado '+(i+1):'Tu nombre completo';
+
+  if(num===1){
+    // Single guest — show everything at once
+    var ph='Tu nombre completo';
     var h='<div style="border:1px solid rgba(122,147,168,0.2);border-radius:3px;padding:clamp(18px,4vw,26px);margin-bottom:14px;text-align:left;background:rgba(255,255,255,0.4);">';
     h+='<p class="rsvp-label" style="margin-bottom:10px;">Nombre completo</p>';
-    h+='<input type="text" class="rsvp-input guest-name" placeholder="'+ph+'" data-idx="'+i+'" style="margin-bottom:20px;">';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">';
-    h+='<div style="display:flex;flex-direction:column;gap:8px;">';
-    h+='<p class="rsvp-label" style="min-height:2.5em;display:flex;align-items:flex-end;">'+qcer+'</p>';
-    h+='<div style="display:flex;gap:8px;">';
-    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="'+i+'" data-tipo="cer" data-val="Si" onclick="selectToggle(this)" style="flex:1;">Sí</button>';
-    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="'+i+'" data-tipo="cer" data-val="No" onclick="selectToggle(this)" style="flex:1;">No</button>';
+    h+='<input type="text" class="rsvp-input guest-name" placeholder="'+ph+'" data-idx="0" style="margin-bottom:24px;">';
+    h+='<p class="rsvp-label" style="margin-bottom:10px;">'+qcer+'</p>';
+    h+='<div style="display:flex;gap:10px;margin-bottom:20px;">';
+    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="0" data-tipo="cer" data-val="Si" onclick="selectToggle(this)" style="flex:1;">Sí</button>';
+    h+='<button type="button" class="rsvp-toggle cer-btn" data-idx="0" data-tipo="cer" data-val="No" onclick="selectToggle(this)" style="flex:1;">No</button>';
+    h+='</div>';
+    h+='<p class="rsvp-label" style="margin-bottom:10px;">'+qrec+'</p>';
+    h+='<div style="display:flex;gap:10px;">';
+    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="0" data-tipo="rec" data-val="Si" onclick="selectToggle(this)" style="flex:1;">Sí</button>';
+    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="0" data-tipo="rec" data-val="No" onclick="selectToggle(this)" style="flex:1;">No</button>';
     h+='</div></div>';
-    h+='<div style="display:flex;flex-direction:column;gap:8px;">';
-    h+='<p class="rsvp-label" style="min-height:2.5em;display:flex;align-items:flex-end;">'+qrec+'</p>';
-    h+='<div style="display:flex;gap:8px;">';
-    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="'+i+'" data-tipo="rec" data-val="Si" onclick="selectToggle(this)" style="flex:1;">Sí</button>';
-    h+='<button type="button" class="rsvp-toggle rec-btn" data-idx="'+i+'" data-tipo="rec" data-val="No" onclick="selectToggle(this)" style="flex:1;">No</button>';
-    h+='</div></div>';
-    h+='</div></div>';
-    container.innerHTML+=h;
+    container.innerHTML=h;
+    return;
+  }
+
+  // Multiple guests — wizard
+  window._rsvpNum=num;
+  window._rsvpStep=0;
+  window._rsvpData=[];
+  for(var j=0;j<num;j++) window._rsvpData.push({nombre:'',ceremonia:'',recepcion:''});
+
+  // Progress bar
+  var prog='<div id="rsvpProgress" style="display:flex;gap:6px;justify-content:center;margin-bottom:24px;">';
+  for(var j=0;j<num;j++){
+    prog+='<div class="rsvp-step-dot" id="rsvpDot'+j+'" style="width:8px;height:8px;border-radius:50%;background:rgba(122,147,168,0.3);transition:background 0.3s;"></div>';
+  }
+  prog+='</div>';
+
+  // Guest card
+  var card='<div id="rsvpWizardCard" style="border:1px solid rgba(122,147,168,0.2);border-radius:3px;padding:clamp(18px,4vw,26px);text-align:left;background:rgba(255,255,255,0.4);">';
+  card+='<p id="rsvpStepLabel" class="rsvp-label" style="margin-bottom:10px;">Invitado 1 de '+num+'</p>';
+  card+='<p class="rsvp-label" style="margin-bottom:10px;">Nombre completo</p>';
+  card+='<input type="text" id="rsvpWizardName" class="rsvp-input" placeholder="Nombre completo del invitado 1" style="margin-bottom:20px;">';
+  card+='<p class="rsvp-label" style="margin-bottom:10px;">'+qcer+'</p>';
+  card+='<div style="display:flex;gap:10px;margin-bottom:20px;">';
+  card+='<button type="button" class="rsvp-toggle cer-btn" data-tipo="cer" data-val="Si" onclick="wizToggle(this)" style="flex:1;">Sí</button>';
+  card+='<button type="button" class="rsvp-toggle cer-btn" data-tipo="cer" data-val="No" onclick="wizToggle(this)" style="flex:1;">No</button>';
+  card+='</div>';
+  card+='<p class="rsvp-label" style="margin-bottom:10px;">'+qrec+'</p>';
+  card+='<div style="display:flex;gap:10px;">';
+  card+='<button type="button" class="rsvp-toggle rec-btn" data-tipo="rec" data-val="Si" onclick="wizToggle(this)" style="flex:1;">Sí</button>';
+  card+='<button type="button" class="rsvp-toggle rec-btn" data-tipo="rec" data-val="No" onclick="wizToggle(this)" style="flex:1;">No</button>';
+  card+='</div>';
+  card+='<div style="display:flex;justify-content:flex-end;margin-top:20px;">';
+  card+='<button type="button" onclick="wizNext()" class="btn-rsvp" style="border:1px solid var(--dark);color:var(--dark);padding:12px 32px;">';
+  card+='<span>Siguiente</span></button>';
+  card+='</div></div>';
+
+  container.innerHTML=prog+card;
+  updateDot(0);
+}
+
+function wizToggle(btn){
+  var tipo=btn.getAttribute('data-tipo');
+  document.querySelectorAll('[data-tipo="'+tipo+'"].rsvp-toggle').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+}
+
+function updateDot(step){
+  var num=window._rsvpNum;
+  for(var j=0;j<num;j++){
+    var dot=document.getElementById('rsvpDot'+j);
+    if(dot) dot.style.background=j===step?'var(--sage)':'rgba(122,147,168,0.3)';
   }
 }
+
+function wizNext(){
+  var step=window._rsvpStep;
+  var num=window._rsvpNum;
+  var errEl=document.getElementById('rsvpError');
+  errEl.style.display='none';
+
+  var nombre=document.getElementById('rsvpWizardName').value.trim();
+  if(!nombre){
+    errEl.textContent='Por favor escribe el nombre completo del invitado '+(step+1)+'.';
+    errEl.style.display='block';
+    document.getElementById('rsvpWizardName').focus();
+    return;
+  }
+  var cerBtn=document.querySelector('[data-tipo="cer"].rsvp-toggle.selected');
+  var recBtn=document.querySelector('[data-tipo="rec"].rsvp-toggle.selected');
+
+  window._rsvpData[step]={
+    nombre:nombre,
+    ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
+    recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
+  };
+
+  step++;
+  window._rsvpStep=step;
+
+  if(step<num){
+    // Next guest
+    document.getElementById('rsvpStepLabel').textContent='Invitado '+(step+1)+' de '+num;
+    document.getElementById('rsvpWizardName').value='';
+    document.getElementById('rsvpWizardName').placeholder='Nombre completo del invitado '+(step+1);
+    document.querySelectorAll('.rsvp-toggle').forEach(function(b){b.classList.remove('selected');});
+    updateDot(step);
+    // Last guest — change button to "Continuar al mensaje"
+    if(step===num-1){
+      document.querySelector('#rsvpWizardCard button span').textContent='Continuar';
+    }
+  } else {
+    // All guests done — show message + submit
+    document.getElementById('rsvpWizardCard').style.display='none';
+    document.getElementById('rsvpProgress').style.display='none';
+    document.getElementById('rsvpMensajeWrap').style.display='block';
+    document.getElementById('rsvpSubmitWrap').style.display='block';
+  }
+}
+
 
 function selectToggle(btn){
   var tipo=btn.getAttribute('data-tipo');
@@ -1578,7 +1674,19 @@ function selectToggle(btn){
   btn.classList.add('selected');
 }
 
-document.addEventListener('DOMContentLoaded',function(){buildGuestFields();});
+document.addEventListener('DOMContentLoaded',function(){
+  buildGuestFields();
+  var num=(window.guestNum&&window.guestNum>0)?window.guestNum:1;
+  var mw=document.getElementById('rsvpMensajeWrap');
+  var sw=document.getElementById('rsvpSubmitWrap');
+  if(num>1){
+    if(mw)mw.style.display='none';
+    if(sw)sw.style.display='none';
+  } else {
+    if(mw)mw.style.display='block';
+    if(sw)sw.style.display='block';
+  }
+});
 
 document.getElementById('rsvpForm').addEventListener('submit',function(e){
   e.preventDefault();
@@ -1588,21 +1696,28 @@ document.getElementById('rsvpForm').addEventListener('submit',function(e){
   var invitados=[];
   var valid=true;
 
-  for(var i=0;i<names.length;i++){
-    var nombre=names[i].value.trim();
+  var num=(window.guestNum&&window.guestNum>0)?window.guestNum:1;
+  if(num===1){
+    // Single guest mode
+    var names=document.querySelectorAll('.guest-name');
+    var nombre=names[0]?names[0].value.trim():'';
     if(!nombre){
-      errEl.textContent='Por favor escribe el nombre completo del invitado '+(i+1)+'.';
+      errEl.textContent='Por favor escribe tu nombre completo.';
       errEl.style.display='block';
-      names[i].focus();
-      valid=false;break;
+      if(names[0])names[0].focus();
+      valid=false;
+    } else {
+      var cerBtn=document.querySelector('[data-tipo="cer"].rsvp-toggle.selected');
+      var recBtn=document.querySelector('[data-tipo="rec"].rsvp-toggle.selected');
+      invitados.push({
+        nombre:nombre,
+        ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
+        recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
+      });
     }
-    var cerBtn=document.querySelector('[data-tipo="cer"][data-idx="'+i+'"].selected');
-    var recBtn=document.querySelector('[data-tipo="rec"][data-idx="'+i+'"].selected');
-    invitados.push({
-      nombre:nombre,
-      ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
-      recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
-    });
+  } else {
+    // Wizard mode — use collected data
+    invitados=window._rsvpData||[];
   }
   if(!valid)return;
 
