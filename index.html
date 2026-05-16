@@ -134,8 +134,8 @@ body{
 /* Tagline */
 .splash-tagline{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(17px,2.8vw,20px);font-style:italic;
-  color:rgba(255,255,255,0.55);
+  font-size:clamp(19px,3.5vw,25px);font-style:italic;
+  color:rgba(255,255,255,0.6);
   margin-top:clamp(12px,2.5vw,20px);
   letter-spacing:0.5px;
   line-height:1.85;
@@ -168,9 +168,9 @@ body{
 }
 .splash-hint{
   font-family:'Cinzel',serif;
-  font-size:clamp(12px,2vw,13px);
-  letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,0.28);
+  font-size:clamp(11px,1.8vw,13px);
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
 }
 @keyframes splashIn{
   from{opacity:0;transform:translateY(18px);}
@@ -915,15 +915,7 @@ img{transition:opacity 0.4s ease;}
   position:relative;
 }
 .swatch:hover{transform:scale(1.2);}
-.swatch:hover::after{
-  content:attr(title);
-  position:absolute;bottom:calc(100% + 6px);left:50%;
-  transform:translateX(-50%);
-  background:var(--dark);color:#fff;
-  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
-  white-space:nowrap;padding:4px 8px;border-radius:2px;
-  pointer-events:none;opacity:0.9;
-}
+
 /* singular/plural switching */
 body.singular .txt-plural{display:none!important;}
 body.singular .txt-singular{display:inline!important;}
@@ -955,7 +947,7 @@ body.plural   .txt-plural{display:inline!important;}
         <div style="width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;"></div>
         <div style="flex:1;max-width:48px;height:1px;background:rgba(201,169,110,0.3);"></div>
       </div>
-      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4.5vw,28px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.88);letter-spacing:0.5px;line-height:1.2;"></p>
+      <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5.5vw,34px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.92);letter-spacing:0.5px;line-height:1.2;"></p>
       <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.6);margin-top:5px;"></p>
     </div>
 
@@ -1375,9 +1367,7 @@ body.plural   .txt-plural{display:inline!important;}
     splashName.textContent  = nombre;
     splashSeats.textContent = num > 1 ? num + ' lugares' : '1 lugar';
     splashGuest.style.display = 'block';
-  // Slightly reduce tagline when guest name shows
-  var tgl=document.querySelector('.splash-tagline');
-  if(tgl){tgl.style.fontSize='clamp(12px,2.2vw,15px)';}
+
   }
 })();
 
