@@ -83,7 +83,7 @@ body{
   position:relative;z-index:2;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  gap:clamp(10px,2.5vw,18px);
+  gap:clamp(12px,2.8vw,20px);
 }
 
 /* Eyebrow date above names */
@@ -700,7 +700,7 @@ body{
 .closing{
   background:var(--dark);
   padding:clamp(96px,14vw,140px) clamp(28px,6vw,64px) clamp(72px,10vw,112px);
-  text-align:center;position:relative;overflow:hidden;
+  text-align:center;position:relative;
   border-top:1px solid rgba(201,169,110,0.12);
 }
 .closing::before{
@@ -950,13 +950,10 @@ body.plural   .txt-plural{display:inline!important;}
   <canvas id="splashCanvas"></canvas>
   <div class="splash-inner">
 
-    <!-- fecha eyebrow — contexto antes de los nombres -->
-    <p class="splash-eyebrow">01 · Agosto · 2026</p>
-
     <!-- nombres novios — protagonistas -->
     <div class="splash-names">Debanhi <span class="splash-amp">&</span> José</div>
 
-    <!-- divisor dorado — separa título del contenido -->
+    <!-- divisor dorado -->
     <div class="splash-divider"></div>
 
     <!-- nombre del invitado — subordinado, discreta etiqueta -->
@@ -967,7 +964,7 @@ body.plural   .txt-plural{display:inline!important;}
     </div>
 
     <!-- cita bíblica -->
-    <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.82em;opacity:0.5;letter-spacing:4px;font-style:normal;font-family:'Cinzel',serif;font-size:9px;">Cantares 6:3</span></p>
+    <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-style:normal;font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;opacity:0.5;">Cantares 6:3</span></p>
 
     <!-- CTA -->
     <div class="splash-btn">
@@ -1303,20 +1300,23 @@ body.plural   .txt-plural{display:inline!important;}
 
 <!-- CIERRE -->
 <div class="closing">
-  <!-- ornamento superior: una sola línea con diamante centrado -->
-  <div class="reveal" style="margin-bottom:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;overflow:hidden;">
+  <!-- ornamento superior -->
+  <div class="reveal" style="margin-bottom:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;">
     <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(163,176,151,0.5));"></div>
     <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.55;flex-shrink:0;animation:diamondPulse 4s ease-in-out infinite;"></div>
     <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(163,176,151,0.5));"></div>
   </div>
-  <div style="padding:0 clamp(20px,5vw,60px);">
+
+  <!-- contenido -->
+  <div style="padding:0 clamp(20px,5vw,60px);text-align:center;">
     <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
     <p class="closing-date reveal d1">01 · Agosto · 2026</p>
     <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
     <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5.5vw,42px);font-style:italic;color:rgba(255,255,255,0.65);margin-top:32px;letter-spacing:0.5px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
   </div>
-  <!-- ornamento inferior: igual que el superior -->
-  <div class="reveal" style="margin-top:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;overflow:hidden;">
+
+  <!-- ornamento inferior — idéntico al superior, fuera del padding -->
+  <div class="reveal" style="margin-top:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;">
     <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(163,176,151,0.5));"></div>
     <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.55;flex-shrink:0;animation:diamondPulse 4s ease-in-out infinite;"></div>
     <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(163,176,151,0.5));"></div>
