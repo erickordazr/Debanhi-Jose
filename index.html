@@ -79,20 +79,22 @@ body{
   50%{transform:scale(1.15);opacity:1;}
 }
 
-.splash-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2.5vw,18px);}
+.splash-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vw,22px);}
 
 /* Top ornament line */
 .splash-ornament{
   display:flex;align-items:center;gap:14px;
-  margin-bottom:clamp(28px,5vw,44px);
+  margin:0;
   animation:splashIn 1.2s ease both;
+  width:min(280px,70vw);
 }
 .splash-orn-line{
-  width:clamp(40px,8vw,72px);height:1px;
-  background:linear-gradient(to right,transparent,rgba(201,169,110,0.5));
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(201,169,110,0.55));
 }
 .splash-orn-line.right{
-  background:linear-gradient(to left,transparent,rgba(201,169,110,0.5));
+  flex:1;
+  background:linear-gradient(to left,transparent,rgba(201,169,110,0.55));
 }
 .splash-orn-diamond{
   width:5px;height:5px;
@@ -118,7 +120,7 @@ body{
 .splash-divider{
   width:clamp(48px,10vw,80px);height:1px;
   background:linear-gradient(to right,transparent,rgba(201,169,110,0.6),transparent);
-  margin:clamp(16px,3vw,24px) 0;
+  margin:0;
   animation:splashIn 1.2s 0.3s ease both;opacity:0;
 }
 
@@ -136,7 +138,7 @@ body{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(19px,3.5vw,25px);font-style:italic;
   color:rgba(255,255,255,0.6);
-  margin-top:clamp(12px,2.5vw,20px);
+  margin-top:0;
   letter-spacing:0.5px;
   line-height:1.85;
   animation:splashIn 1.2s 0.55s ease both;opacity:0;
@@ -144,7 +146,7 @@ body{
 
 /* CTA */
 .splash-btn{
-  margin-top:clamp(20px,4vw,36px);
+  margin-top:0;
   display:flex;flex-direction:column;align-items:center;gap:12px;
   animation:splashIn 1.2s 0.75s ease both;opacity:0;
 }
@@ -653,8 +655,11 @@ body{
   transition:transform 0.4s cubic-bezier(.77,0,.175,1);
 }
 .btn-rsvp.no-fill::before{display:none!important;}
+/* Wizard next button: never show green fill on mobile tap */
+#rsvpWizardCard .btn-rsvp::before{display:none!important;}
 .btn-rsvp:hover::before{transform:translateX(0);}
 .btn-rsvp:hover{color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(125,140,114,0.2);}
+.btn-rsvp:not(:hover):not(:focus)::before{transform:translateX(-101%);}
 .btn-rsvp span{position:relative;z-index:1;}
 
 /* ══════════════════════════════
@@ -933,34 +938,34 @@ body.plural   .txt-plural{display:inline!important;}
   <div class="splash-inner">
 
     <!-- ornamento superior -->
-    <div class="splash-ornament" style="animation:splashIn 1.2s ease both;margin:0;">
+    <div class="splash-ornament" style="animation:splashIn 1.2s ease both;">
       <div class="splash-orn-line"></div>
       <div class="splash-orn-diamond"></div>
       <div class="splash-orn-line right"></div>
     </div>
 
     <!-- nombres novios -->
-    <div class="splash-names" style="margin-bottom:0;">Debanhi <span class="splash-amp">&</span> José</div>
+    <div class="splash-names" style="margin:0;">Debanhi <span class="splash-amp">&</span> José</div>
 
     <!-- nombre invitado — debajo de nombres, encima de divisor -->
-    <div id="splashGuest" style="display:none;width:100%;margin-top:clamp(16px,3vw,24px);animation:splashIn 1.2s 0.2s ease both;opacity:0;text-align:center;">
-      <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:10px;">
-        <div style="flex:1;max-width:48px;height:1px;background:rgba(201,169,110,0.3);"></div>
-        <div style="width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;"></div>
-        <div style="flex:1;max-width:48px;height:1px;background:rgba(201,169,110,0.3);"></div>
+    <div id="splashGuest" style="display:none;width:100%;animation:splashIn 1.2s 0.2s ease both;opacity:0;text-align:center;">
+      <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:10px;width:min(160px,40vw);margin-left:auto;margin-right:auto;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,0.3));"></div>
+        <div style="width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;flex-shrink:0;"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(201,169,110,0.3));"></div>
       </div>
       <p id="splashGuestName" style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5.5vw,34px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.92);letter-spacing:0.5px;line-height:1.2;"></p>
       <p id="splashGuestSeats" style="font-family:'Cinzel',serif;font-size:clamp(9px,1.6vw,10px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,169,110,0.6);margin-top:5px;"></p>
     </div>
 
     <!-- divisor dorado -->
-    <div class="splash-divider" style="margin-top:clamp(16px,3vw,24px);"></div>
+    <div class="splash-divider" style="margin:0;"></div>
 
     <!-- cita bíblica — antes del CTA -->
     <p class="splash-tagline">«Yo soy de mi amado, y mi amado es mío.»<br><span style="font-size:0.85em;opacity:0.55;letter-spacing:3px;">Cantares 6:3</span></p>
 
     <!-- ornamento inferior -->
-    <div class="splash-ornament" style="margin-top:clamp(14px,3vw,22px);margin-bottom:0;width:100%;">
+    <div class="splash-ornament" style="margin:0;">
       <div class="splash-orn-line"></div>
       <div class="splash-orn-diamond"></div>
       <div class="splash-orn-line right"></div>
@@ -1672,44 +1677,25 @@ function wizNext(){
     document.getElementById('rsvpStepLabel').textContent='Invitado '+(step+1)+' de '+num;
     document.getElementById('rsvpWizardName').value='';
     document.getElementById('rsvpWizardName').placeholder='Nombre completo del invitado '+(step+1);
-    // Force clear ALL selected states
-    document.querySelectorAll('.cer-btn,.rec-btn').forEach(function(b){
+    // Reset ALL toggle buttons — remove selected class, reset only visual inline overrides
+    document.querySelectorAll('#rsvpWizardCard .rsvp-toggle').forEach(function(b){
       b.classList.remove('selected');
-      b.setAttribute('style', b.getAttribute('style')||'');
-      b.style.background='';
-      b.style.color='';
-      b.style.borderColor='';
+      b.style.background='rgba(255,255,255,0.4)';
+      b.style.color='var(--muted)';
+      b.style.borderColor='rgba(122,147,168,0.3)';
+      b.style.boxShadow='none';
     });
-    // Clear ALL toggle selected states for next guest
-    var wCard=document.getElementById('rsvpWizardCard');
-    if(wCard){
-      wCard.querySelectorAll('.rsvp-toggle').forEach(function(b){
-        b.classList.remove('selected');
-        b.style.background='';
-        b.style.color='';
-      });
-    }
-    // Reset wizard button
-    var wizBtn=document.querySelector('#rsvpWizardCard button');
-    if(wizBtn){
-      wizBtn.classList.remove('selected');
-      wizBtn.style.cssText='border:1px solid var(--dark);color:var(--dark);padding:12px 32px;overflow:hidden;';
-    }
     updateDot(step);
-    // Reset button appearance then update text
-    var wBtn=document.querySelector('#rsvpWizardCard button');
-    if(wBtn){
-      wBtn.classList.remove('selected');
-      wBtn.style.background='';
-      wBtn.style.color='var(--dark)';
-    }
     if(step===num-1){
-      document.querySelector('#rsvpWizardCard button span').textContent='Continuar';
+      document.querySelector('#rsvpWizardCard button[onclick="wizNext()"] span').textContent='Continuar';
     }
-    // Clear toggles and reset button
-    document.querySelectorAll('.rsvp-toggle').forEach(function(b){b.classList.remove('selected');});
-    var wb=document.querySelector('#rsvpWizardCard button');
-    if(wb){wb.style.background='transparent';wb.style.color='var(--dark)';wb.blur();}
+    // Reset Next/Continuar button to clean transparent state
+    var wb=document.querySelector('#rsvpWizardCard button[onclick="wizNext()"]');
+    if(wb){
+      wb.classList.remove('selected');
+      wb.style.cssText='border:1px solid var(--dark);color:var(--dark);width:100%;overflow:hidden;margin-top:8px;background:transparent;';
+      wb.blur();
+    }
   } else {
     // All guests done — show message + submit
     document.getElementById('rsvpWizardCard').style.display='none';
