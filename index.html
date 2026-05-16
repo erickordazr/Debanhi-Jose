@@ -227,7 +227,7 @@ body{
 .page-wrap{max-width:var(--max);margin:0 auto;}
 
 .section{
-  padding:clamp(56px,9vw,104px) clamp(28px,7vw,72px);
+  padding:clamp(64px,10vw,112px) clamp(32px,7vw,72px);
   text-align:center;
   position:relative;
 }
@@ -237,55 +237,70 @@ body{
 .section-dusty{background:var(--dusty3);}
 .section-dark{background:var(--dark);}
 
+/* ── Eyebrow label — same in every section ── */
 .label{
   display:block;font-family:'Cinzel',serif;
-  font-size:clamp(12px,2vw,13px);letter-spacing:4px;text-transform:uppercase;
-  color:var(--sage);margin-bottom:20px;
-  max-width:100%;
+  font-size:11px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--sage);margin-bottom:18px;
 }
 .label-light{color:var(--sage3);}
 
-/* Section titles — main visual header per block */
+/* ── Section heading — Cormorant, light, consistent ── */
 .section-title{
   display:block;
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(24px,5.5vw,38px);
+  font-size:clamp(22px,5vw,34px);
   font-weight:300;
   color:var(--dark);
-  letter-spacing:2px;
-  line-height:1.25;
-  margin-bottom:32px;
+  letter-spacing:1.5px;
+  line-height:1.2;
+  margin-bottom:0;
 }
-.section-title-light{
-  color:rgba(255,255,255,0.85);
-}
-.section-title + .orn{margin-top:0;}
-.section-title + .body-text{margin-top:20px;}
+.section-title-light{color:rgba(255,255,255,0.88);}
+.section-title + .orn{margin-top:20px;}
+.section-title + .body-text{margin-top:24px;}
+
+/* ── Script heading ── */
 .script-title{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(40px,7vw,64px);
+  font-size:clamp(38px,7vw,62px);
   color:var(--dark);line-height:1.1;margin-bottom:8px;
 }
 .script-light{color:#fff;}
+
+/* ── Body text — unified across sections ── */
 .body-text{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(17px,2.6vw,20px);
-  color:var(--muted);line-height:2;
-  max-width:480px;margin:0 auto;
-  letter-spacing:0.3px;
+  font-size:clamp(16px,2.4vw,19px);
+  color:var(--muted);line-height:1.95;
+  max-width:460px;margin:0 auto;
+  letter-spacing:0.2px;
   font-kerning:normal;
   text-rendering:optimizeLegibility;
 }
-.orn{display:flex;align-items:center;gap:14px;justify-content:center;margin:32px 0;}
-.orn-line{flex:1;max-width:80px;height:1px;background:var(--line);transition:max-width var(--transition);}
+
+/* ── Ornament — single shared component ── */
+.orn{
+  display:flex;align-items:center;gap:16px;
+  justify-content:center;
+  margin:28px auto;
+  width:min(180px,45vw);
+}
+.orn-line{
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(201,169,110,0.4));
+}
+.orn-line:last-child{
+  background:linear-gradient(to left,transparent,rgba(201,169,110,0.4));
+}
 .orn-diamond{
-  width:5px;height:5px;background:var(--gold);
-  transform:rotate(45deg);flex-shrink:0;
-  animation:diamondPulse 3s ease-in-out infinite;
+  width:4px;height:4px;background:var(--gold);
+  transform:rotate(45deg);flex-shrink:0;opacity:0.65;
+  animation:diamondPulse 4s ease-in-out infinite;
 }
 @keyframes diamondPulse{
   0%,100%{opacity:0.4;transform:rotate(45deg) scale(1);}
-  50%{opacity:0.8;transform:rotate(45deg) scale(1.4);}
+  50%{opacity:0.75;transform:rotate(45deg) scale(1.5);}
 }
 
 /* ══════════════════════════════
@@ -384,19 +399,19 @@ body{
 .parents-sep{background:var(--line);}
 .parents-role{
   display:block;font-family:'Cinzel',serif;
-  font-size:clamp(13px,2.2vw,14px);letter-spacing:3px;text-transform:uppercase;
-  color:var(--dusty);margin-bottom:12px;
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--sage);margin-bottom:14px;
 }
 .parents-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(15px,2.4vw,17px);color:var(--dark);line-height:1.6;
+  font-size:clamp(14px,2.2vw,16px);color:var(--dark);line-height:1.65;
   white-space:nowrap;
   display:block;
   letter-spacing:0.2px;
 }
 .parents-name:last-child{
-  padding-bottom:10px;
-  border-bottom:1px solid rgba(201,169,110,0.2);
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(201,169,110,0.18);
 }
 
 /* ══════════════════════════════
@@ -567,21 +582,21 @@ body{
 }
 .tl-time{
   display:block;font-family:'Cinzel',serif;
-  font-size:clamp(17px,2.8vw,20px);letter-spacing:3px;
-  color:var(--dusty);text-transform:uppercase;margin-bottom:8px;
+  font-size:clamp(14px,2.2vw,16px);letter-spacing:3px;
+  color:var(--sage);text-transform:uppercase;margin-bottom:6px;
   font-weight:400;
 }
-.tl-event{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.2vw,22px);font-weight:400;color:var(--dark);line-height:1.3;}
-.tl-place{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.4vw,17px);font-style:italic;color:var(--muted);margin-top:6px;line-height:1.5;}
+.tl-event{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);font-weight:400;color:var(--dark);line-height:1.25;}
+.tl-place{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,2.2vw,16px);font-style:italic;color:var(--muted);margin-top:5px;line-height:1.5;}
 .map-link{
   display:inline-flex;align-items:center;gap:3px;
   margin-top:10px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(17px,2.6vw,20px);
-  font-style:italic;
-  color:rgba(122,147,168,0.65);
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(122,147,168,0.6);
   text-decoration:none;
-  opacity:0.85;
+  opacity:0.8;
   transition:opacity 0.2s,color 0.2s;
 }
 .map-link:hover{opacity:1;color:var(--dusty);}
@@ -678,21 +693,21 @@ body{
 }
 .closing-script{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(40px,9vw,80px);color:#fff;line-height:1.1;position:relative;
-  text-shadow:0 4px 40px rgba(0,0,0,0.25);
+  font-size:clamp(40px,9vw,80px);color:#fff;line-height:1.05;position:relative;
+  text-shadow:0 2px 32px rgba(0,0,0,0.2);
   white-space:nowrap;
 }
 .closing-amp{color:var(--dusty3);}
 .closing-date{
   font-family:'Cinzel',serif;
-  font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;
-  color:var(--sage3);margin-top:20px;position:relative;
+  font-size:11px;letter-spacing:5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.38);margin-top:18px;position:relative;
 }
 .closing-msg{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(17px,2.6vw,20px);font-style:italic;
-  color:rgba(255,255,255,0.42);margin-top:32px;
-  max-width:420px;margin-left:auto;margin-right:auto;
+  font-size:clamp(16px,2.4vw,19px);font-style:italic;
+  color:rgba(255,255,255,0.38);margin-top:28px;
+  max-width:400px;margin-left:auto;margin-right:auto;
   position:relative;line-height:1.9;
 }
 
@@ -758,42 +773,22 @@ body::before{
   content:'';
   display:block;
   width:100%;height:1px;
-  background:linear-gradient(to right,transparent 5%,var(--gold) 50%,transparent 95%);
-  opacity:0.7;
+  background:linear-gradient(to right,transparent 10%,rgba(201,169,110,0.5) 50%,transparent 90%);
   position:fixed;top:0;left:0;z-index:500;
   pointer-events:none;
 }
 
-/* Section subtle top border accent */
+/* Section subtle separators — uniform gold at 0.12 opacity */
 .section-warm{
-  border-top:1px solid rgba(201,169,110,0.15);
-  border-bottom:1px solid rgba(201,169,110,0.15);
+  border-top:1px solid rgba(201,169,110,0.12);
+  border-bottom:1px solid rgba(201,169,110,0.12);
 }
 .section-ivory+.section-ivory{
-  border-top:1px solid rgba(125,140,114,0.1);
+  border-top:1px solid rgba(125,140,114,0.08);
 }
 .section-dusty{
-  border-top:1px solid rgba(122,147,168,0.15);
-  border-bottom:1px solid rgba(122,147,168,0.15);
-}
-
-/* Closing animated lines */
-.closing-line-animated{
-  height:1px;
-  width:0;
-  background:rgba(163,176,151,0.35);
-  max-width:clamp(60px,15vw,120px);
-  animation:lineExpand 1.2s cubic-bezier(.4,0,.2,1) forwards;
-  animation-play-state:paused;
-  flex-shrink:0;
-}
-.reveal.visible .closing-line-animated,
-.closing-line-animated.visible{
-  animation-play-state:running;
-}
-@keyframes lineExpand{
-  from{width:0;opacity:0;}
-  to{width:120px;opacity:1;}
+  border-top:1px solid rgba(122,147,168,0.12);
+  border-bottom:1px solid rgba(122,147,168,0.12);
 }
 
 /* Smooth image loading */
@@ -842,10 +837,10 @@ img{transition:opacity 0.4s ease;}
   /* Section padding tighter */
   .section{padding:40px 20px;}
 
-  /* Labels uniform on mobile */
-  .label, .cd-script{
-    font-size:clamp(12px,2vw,13px);
-    letter-spacing:2px;
+  /* Labels uniform on mobile — keep 11px system */
+  .label{
+    font-size:11px;
+    letter-spacing:4px;
   }
   .section-title{
     font-size:clamp(20px,6vw,28px);
@@ -869,9 +864,9 @@ img{transition:opacity 0.4s ease;}
   .tl-empty{opacity:0;pointer-events:none;display:block;}
   .tl-node{margin:0 auto;}
   .tl-event{font-size:clamp(14px,4vw,17px);}
-  .tl-place{font-size:clamp(13px,2.2vw,14px);}
-  .tl-time{font-size:clamp(15px,2.4vw,17px);letter-spacing:2px;}
-  .map-link{font-size:clamp(15px,2.4vw,17px);margin-top:8px;}
+  .tl-place{font-size:clamp(13px,3.5vw,15px);}
+  .tl-time{font-size:clamp(11px,2.8vw,13px);letter-spacing:3px;}
+  .map-link{font-size:10px;margin-top:8px;}
 
   /* Carousel full width on mobile */
   .carousel{width:100%;border-radius:0;}
@@ -882,7 +877,7 @@ img{transition:opacity 0.4s ease;}
 
   /* Closing tighter */
   .closing{padding:56px 24px;}
-  .closing-msg{font-size:clamp(16px,2.6vw,18px);}
+  .closing-msg{font-size:clamp(15px,2.4vw,17px);}
 
   /* Body text slightly smaller on mobile */
   .body-text{font-size:clamp(17px,2.6vw,20px);}
@@ -1001,9 +996,8 @@ body.plural   .txt-plural{display:inline!important;}
 <div class="section section-ivory">
   <p class="body-text reveal">Después de caminar juntos de la mano de Dios, hemos decidido unir nuestras vidas en el sagrado sacramento del matrimonio.</p>
   <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="body-text reveal d2" style="font-size:clamp(15px,2.4vw,17px);letter-spacing:3px;text-transform:uppercase;color:var(--dark);line-height:2;font-family:'Cormorant Garamond',serif;font-weight:300;">Con la bendición de Dios<br>y de nuestros padres</p>
-  <div class="orn reveal d3"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <div class="parents-grid" style="margin-top:28px;">
+  <p class="reveal d2" style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--sage);line-height:2;">Con la bendición de Dios<br>y de nuestros padres</p>
+  <div class="parents-grid" style="margin-top:36px;">
     <div style="text-align:center;" class="reveal-left d2">
       <span class="parents-role">Padres de la novia</span>
       <p class="parents-name">Carlos Alberto Molina Mendoza</p><p class="parents-name" style="margin-top:6px;">Verónica Ibarra Hernández</p>
@@ -1025,32 +1019,25 @@ body.plural   .txt-plural{display:inline!important;}
 
 <!-- FECHA -->
 <div class="section section-warm">
-  <span class="section-title reveal" style="margin-bottom:0;"><span class="txt-plural">Con alegría los invitamos a celebrar nuestra boda</span><span class="txt-singular" style="display:none;">Con alegría te invitamos a celebrar nuestra boda</span></span>
+  <span class="section-title reveal"><span class="txt-plural">Con alegría los invitamos a celebrar nuestra boda</span><span class="txt-singular" style="display:none;">Con alegría te invitamos a celebrar nuestra boda</span></span>
 
-  <div class="reveal d2" style="margin-top:0;text-align:center;position:relative;">
-
-    <div style="display:inline-flex;align-items:center;gap:clamp(12px,3vw,28px);position:relative;">
-      <div style="width:1px;height:clamp(48px,10vw,80px);background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:0.4;"></div>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(80px,22vw,128px);font-weight:300;color:var(--dark);line-height:0.9;letter-spacing:-1px;position:relative;">01<span style="position:absolute;inset:-20px;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(201,169,110,0.07),transparent);pointer-events:none;z-index:-1;"></span></p>
-      <div style="width:1px;height:clamp(48px,10vw,80px);background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:0.4;"></div>
+  <div class="reveal d2" style="margin-top:28px;text-align:center;">
+    <div style="display:inline-flex;align-items:center;gap:clamp(12px,3vw,28px);">
+      <div style="width:1px;height:clamp(44px,9vw,72px);background:linear-gradient(to bottom,transparent,rgba(201,169,110,0.35),transparent);"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(72px,20vw,116px);font-weight:300;color:var(--dark);line-height:0.9;letter-spacing:-2px;">01</p>
+      <div style="width:1px;height:clamp(44px,9vw,72px);background:linear-gradient(to bottom,transparent,rgba(201,169,110,0.35),transparent);"></div>
     </div>
 
-    <div style="display:flex;align-items:center;gap:16px;justify-content:center;margin:18px auto 20px;max-width:140px;">
-      <div style="flex:1;height:1px;background:var(--line);"></div>
-      <div style="width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:0.75;flex-shrink:0;"></div>
-      <div style="flex:1;height:1px;background:var(--line);"></div>
-    </div>
+    <div class="orn" style="margin:20px auto;"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
 
-    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);font-weight:300;letter-spacing:2px;color:var(--muted);line-height:1;">Agosto &nbsp;·&nbsp; 2026</p>
-
-    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,3.2vw,22px);font-style:italic;color:var(--sage);margin-top:14px;">Sábado</p>
-
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.4vw,18px);font-weight:300;letter-spacing:3px;color:var(--muted);line-height:1;text-transform:uppercase;">Agosto · 2026</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.8vw,20px);font-style:italic;color:var(--sage);margin-top:12px;">Sábado</p>
   </div>
 </div>
 
 <!-- COUNTDOWN -->
 <div class="countdown-wrap">
-  <div class="cd-script section-title section-title-light" style="margin-bottom:clamp(44px,6vw,64px);font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:1px;font-size:clamp(22px,5vw,34px);">Cada segundo nos acerca al altar</div>
+  <p class="section-title section-title-light reveal-scale" style="margin-bottom:clamp(40px,6vw,60px);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;letter-spacing:0.5px;">Cada segundo nos acerca al altar</p>
   <div class="cd-grid reveal-scale">
     <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-unit">Días</span></div>
     <div class="cd-box"><span class="cd-num" id="cd-hours">--</span><span class="cd-unit">Horas</span></div>
@@ -1143,19 +1130,19 @@ body.plural   .txt-plural{display:inline!important;}
 
   <span class="section-title reveal">Código de vestimenta</span>
   <div class="orn reveal d1"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
-  <p class="reveal d1" style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:4px;text-transform:uppercase;color:var(--sage);margin-bottom:40px;">Garden Formal</p>
+  <p class="label reveal d1" style="margin-bottom:36px;">Garden Formal</p>
 
   <div class="reveal d2" style="display:flex;flex-direction:column;gap:2px;max-width:480px;margin:0 auto;">
 
     <!-- ── MUJERES ── -->
-    <div style="background:var(--ivory3);border:1px solid var(--line);border-radius:3px 3px 0 0;padding:clamp(28px,5vw,44px) clamp(24px,5vw,40px);text-align:center;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:3px 3px 0 0;padding:clamp(28px,5vw,40px) clamp(24px,5vw,36px);text-align:center;box-shadow:0 2px 16px rgba(44,54,40,0.06);">
 
-      <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:20px;">Mujeres</p>
+      <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;">Mujeres</p>
 
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Vestido largo o corte midi<br>Hombros y escote cubiertos para la iglesia</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,19px);color:var(--dark);line-height:1.8;margin-bottom:24px;">Vestido largo o corte midi<br>Hombros y escote cubiertos para la iglesia</p>
 
-      <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px;">
+      <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
         <span class="swatch" style="background:#f4b8cc;"></span>
         <span class="swatch" style="background:#e87eaa;"></span>
         <span class="swatch" style="background:#c8e8b0;"></span>
@@ -1165,21 +1152,21 @@ body.plural   .txt-plural{display:inline!important;}
         <span class="swatch" style="background:#f8d898;"></span>
       </div>
 
-      <div style="border-top:1px solid var(--line);padding-top:20px;">
-        <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Se reserva</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;">Blanco · Beige · Plateado</p>
+      <div style="border-top:1px solid var(--line);padding-top:18px;">
+        <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Se reserva</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,19px);color:var(--dark);line-height:1.8;">Blanco · Beige · Plateado</p>
       </div>
     </div>
 
     <!-- ── HOMBRES ── -->
-    <div style="background:var(--ivory3);border:1px solid var(--line);border-top:none;border-radius:0 0 3px 3px;padding:clamp(28px,5vw,44px) clamp(24px,5vw,40px);text-align:center;">
+    <div style="background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 3px 3px;padding:clamp(28px,5vw,40px) clamp(24px,5vw,36px);text-align:center;box-shadow:0 2px 16px rgba(44,54,40,0.06);">
 
-      <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:20px;">Hombres</p>
+      <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;">Hombres</p>
 
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;margin-bottom:28px;">Traje o pantalón formal<br>Camisa de vestir o de lino manga larga<br>Zapatos formales</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,19px);color:var(--dark);line-height:1.8;margin-bottom:24px;">Traje o pantalón formal<br>Camisa de vestir o de lino manga larga<br>Zapatos formales</p>
 
-      <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px;">
+      <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Colores sugeridos</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
         <span class="swatch" style="background:#c8d4b8;"></span>
         <span class="swatch" style="background:#8ca880;"></span>
         <span class="swatch" style="background:#3d6b4f;"></span>
@@ -1190,9 +1177,9 @@ body.plural   .txt-plural{display:inline!important;}
         <span class="swatch" style="background:#8b4a35;"></span>
       </div>
 
-      <div style="border-top:1px solid var(--line);padding-top:20px;">
-        <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2vw,13px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Se reserva</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,20px);color:var(--dark);line-height:1.8;">Azul · Gris</p>
+      <div style="border-top:1px solid var(--line);padding-top:18px;">
+        <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Se reserva</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.4vw,19px);color:var(--dark);line-height:1.8;">Azul · Gris</p>
       </div>
     </div>
 
@@ -1297,21 +1284,23 @@ body.plural   .txt-plural{display:inline!important;}
 
 <!-- CIERRE -->
 <div class="closing">
-  <div class="reveal" style="margin-bottom:48px;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;overflow:hidden;">
-    <div class="closing-line-animated"></div>
-    <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.6;"></div>
-    <div class="closing-line-animated" style="animation-delay:0.3s;"></div>
+  <!-- ornamento superior: una sola línea con diamante centrado -->
+  <div class="reveal" style="margin-bottom:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;overflow:hidden;">
+    <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(163,176,151,0.5));"></div>
+    <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.55;flex-shrink:0;animation:diamondPulse 4s ease-in-out infinite;"></div>
+    <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(163,176,151,0.5));"></div>
   </div>
   <div style="padding:0 clamp(20px,5vw,60px);">
     <div class="closing-script reveal">Debanhi <span class="closing-amp">&</span> José</div>
     <p class="closing-date reveal d1">01 · Agosto · 2026</p>
     <p class="closing-msg reveal d2"><span class="txt-plural">Con mucha ilusión queremos vivir este momento rodeados de las personas que han formado parte de nuestra historia.</span><span class="txt-singular" style="display:none;">Con mucha ilusión queremos vivir este momento contigo, quien ha formado parte de nuestra historia.</span></p>
-    <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-style:italic;color:rgba(255,255,255,0.7);margin-top:36px;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
+    <p class="reveal d3" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5.5vw,42px);font-style:italic;color:rgba(255,255,255,0.65);margin-top:32px;letter-spacing:0.5px;text-shadow:0 2px 20px rgba(0,0,0,0.2);"><span class="txt-plural">¡Los esperamos!</span><span class="txt-singular" style="display:none;">¡Te esperamos!</span></p>
   </div>
-  <div class="reveal d3" style="margin-top:48px;margin-bottom:0;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;overflow:hidden;">
-    <div class="closing-line-animated" style="animation-delay:0.2s;"></div>
-    <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.6;"></div>
-    <div class="closing-line-animated" style="animation-delay:0.5s;"></div>
+  <!-- ornamento inferior: igual que el superior -->
+  <div class="reveal d3" style="margin-top:56px;display:flex;align-items:center;justify-content:center;gap:16px;width:min(200px,50vw);margin-left:auto;margin-right:auto;overflow:hidden;">
+    <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(163,176,151,0.5));"></div>
+    <div style="width:5px;height:5px;background:var(--sage3);transform:rotate(45deg);opacity:0.55;flex-shrink:0;animation:diamondPulse 4s ease-in-out infinite;"></div>
+    <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(163,176,151,0.5));"></div>
   </div>
 </div>
 
