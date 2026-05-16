@@ -1657,13 +1657,23 @@ function wizNext(){
     document.getElementById('rsvpWizardName').focus();
     return;
   }
-  var cerBtn=document.querySelector('[data-tipo="cer"].rsvp-toggle.selected');
-  var recBtn=document.querySelector('[data-tipo="rec"].rsvp-toggle.selected');
+  var cerBtn=document.querySelector('#rsvpWizardCard [data-tipo="cer"].rsvp-toggle.selected');
+  var recBtn=document.querySelector('#rsvpWizardCard [data-tipo="rec"].rsvp-toggle.selected');
+  if(!cerBtn){
+    errEl.textContent='Por favor indica si asistirás a la ceremonia.';
+    errEl.style.display='block';
+    return;
+  }
+  if(!recBtn){
+    errEl.textContent='Por favor indica si asistirás a la recepción.';
+    errEl.style.display='block';
+    return;
+  }
 
   window._rsvpData[step]={
     nombre:nombre,
-    ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
-    recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
+    ceremonia:cerBtn.getAttribute('data-val'),
+    recepcion:recBtn.getAttribute('data-val')
   };
 
   step++;
@@ -1746,11 +1756,21 @@ document.getElementById('rsvpForm').addEventListener('submit',function(e){
     } else {
       var cerBtn=document.querySelector('[data-tipo="cer"].rsvp-toggle.selected');
       var recBtn=document.querySelector('[data-tipo="rec"].rsvp-toggle.selected');
-      invitados.push({
-        nombre:nombre,
-        ceremonia:cerBtn?cerBtn.getAttribute('data-val'):'Sin confirmar',
-        recepcion:recBtn?recBtn.getAttribute('data-val'):'Sin confirmar'
-      });
+      if(!cerBtn){
+        errEl.textContent='Por favor indica si asistirás a la ceremonia.';
+        errEl.style.display='block';
+        valid=false;
+      } else if(!recBtn){
+        errEl.textContent='Por favor indica si asistirás a la recepción.';
+        errEl.style.display='block';
+        valid=false;
+      } else {
+        invitados.push({
+          nombre:nombre,
+          ceremonia:cerBtn.getAttribute('data-val'),
+          recepcion:recBtn.getAttribute('data-val')
+        });
+      }
     }
   } else {
     // Wizard mode — use collected data
